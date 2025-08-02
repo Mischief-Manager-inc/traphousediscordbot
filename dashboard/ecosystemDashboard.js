@@ -26,6 +26,24 @@ class EcosystemDashboard {
         this.verifiedInteractions = new Map();
         this.strategyCoach = new TiltCheckStrategyCoach();
         
+        // Terms & Legal Agreement System
+        this.legalAgreements = {
+            version: "1.0",
+            lastUpdated: "2025-08-02",
+            terms: {
+                ecosystem: "TiltCheck Ecosystem Terms of Service",
+                nft: "Degens Trust Score NFT Agreement",
+                privacy: "Privacy Policy and Data Usage",
+                analytics: "Analytics and Tracking Consent",
+                liability: "Liability and Risk Disclaimer"
+            }
+        };
+        
+        // Ecosystem Account Management
+        this.ecosystemAccounts = new Map(); // Full user accounts
+        this.pendingAgreements = new Map(); // Users who haven't completed legal process
+        this.accountSessions = new Map(); // Active login sessions across branches
+        
         this.setupMiddleware();
         this.setupRoutes();
         this.initializeDashboard();
@@ -69,7 +87,21 @@ class EcosystemDashboard {
         // Discord community and verification endpoints
         this.app.get('/api/discord/community', this.getDiscordCommunity.bind(this));
         this.app.post('/api/discord/verify', this.verifyWithJustTheTip.bind(this));
+        
+        // Legal Agreements & Terms System (Required before NFT minting)
+        this.app.get('/api/legal/terms', this.getLegalTerms.bind(this));
+        this.app.post('/api/legal/accept', this.acceptLegalTerms.bind(this));
+        this.app.get('/api/legal/status/:discordId', this.getLegalStatus.bind(this));
+        
+        // Ecosystem Account Management
+        this.app.post('/api/account/create', this.createEcosystemAccount.bind(this));
+        this.app.post('/api/account/login', this.loginEcosystemAccount.bind(this));
+        this.app.get('/api/account/profile/:discordId', this.getAccountProfile.bind(this));
+        this.app.put('/api/account/update', this.updateAccountProfile.bind(this));
+        
+        // NFT Minting (requires legal acceptance)
         this.app.post('/api/nft/mint-signature', this.mintSignatureNFT.bind(this));
+        this.app.get('/api/nft/requirements/:discordId', this.getNFTRequirements.bind(this));
         this.app.get('/api/trust-score/:userId', this.getTrustScore.bind(this));
         this.app.post('/api/trust-score/interaction', this.recordTrustInteraction.bind(this));
         
@@ -677,6 +709,380 @@ class EcosystemDashboard {
         };
     }
 
+    // Legal Agreements & Terms System
+    getLegalTerms(req, res) {
+        res.json({
+            version: this.legalAgreements.version,
+            lastUpdated: this.legalAgreements.lastUpdated,
+            agreements: {
+                ecosystem: {
+                    title: "TiltCheck Ecosystem Terms of Service",
+                    content: "By using TiltCheck services, you agree to play responsibly and acknowledge that gambling involves risk. TiltCheck provides tools and insights but does not guarantee outcomes.",
+                    required: true
+                },
+                nft: {
+                    title: "Degens Trust Score NFT Agreement", 
+                    content: "Your Degens Trust Score NFT represents your verified interactions within the ecosystem. This creates a blockchain footprint of your engagement and trust level.",
+                    required: true
+                },
+                privacy: {
+                    title: "Privacy Policy and Data Usage",
+                    content: "We collect Discord ID, JustTheTip wallet information, and interaction data to provide personalized services and track your trust score across all ecosystem branches.",
+                    required: true
+                },
+                analytics: {
+                    title: "Analytics and Tracking Consent",
+                    content: "Your activities are tracked for beta analytics, money saved calculations, accuracy scoring, and ecosystem improvement. Data is linked to your Discord ID and trust score NFT.",
+                    required: true
+                },
+                liability: {
+                    title: "Liability and Risk Disclaimer",
+                    content: "Made for Degens by Degens - we aren't trying to stop you from playing, just play smarter and more self-aware. You accept full responsibility for your gambling decisions.",
+                    required: true
+                }
+            },
+            signature_required: true,
+            nft_minting_contingent: true
+        });
+    }
+
+    async acceptLegalTerms(req, res) {
+        try {
+            const { discordId, agreementsAccepted, digitalSignature, timestamp } = req.body;
+            
+            // Validate all required agreements are accepted
+            const requiredAgreements = ['ecosystem', 'nft', 'privacy', 'analytics', 'liability'];
+            const missingAgreements = requiredAgreements.filter(agreement => !agreementsAccepted[agreement]);
+            
+            if (missingAgreements.length > 0) {
+                return res.status(400).json({
+                    success: false,
+                    message: "All legal agreements must be accepted",
+                    missing: missingAgreements
+                });
+            }
+
+            if (!digitalSignature || !timestamp) {
+                return res.status(400).json({
+                    success: false,
+                    message: "Digital signature and timestamp required"
+                });
+            }
+
+            // Store legal acceptance
+            const legalRecord = {
+                discordId,
+                agreementsAccepted,
+                digitalSignature,
+                acceptedAt: new Date(timestamp),
+                ipAddress: req.ip,
+                userAgent: req.get('User-Agent'),
+                version: this.legalAgreements.version,
+                status: 'completed'
+            };
+
+            this.pendingAgreements.delete(discordId); // Remove from pending
+            
+            // Update or create ecosystem account
+            const existingAccount = this.ecosystemAccounts.get(discordId);
+            if (existingAccount) {
+                existingAccount.legalStatus = legalRecord;
+                existingAccount.canMintNFT = true;
+            } else {
+                // Will be completed when account is created
+                this.pendingAgreements.set(discordId, legalRecord);
+            }
+
+            res.json({
+                success: true,
+                message: "Legal agreements accepted successfully",
+                status: "ready_for_nft_minting",
+                next_step: "Create ecosystem account or mint NFT"
+            });
+        } catch (error) {
+            console.error('Legal acceptance error:', error);
+            res.status(500).json({ success: false, message: 'Failed to process legal agreements' });
+        }
+    }
+
+    getLegalStatus(req, res) {
+        const { discordId } = req.params;
+        const account = this.ecosystemAccounts.get(discordId);
+        const pending = this.pendingAgreements.get(discordId);
+        
+        if (account && account.legalStatus) {
+            res.json({
+                status: 'completed',
+                accepted_at: account.legalStatus.acceptedAt,
+                version: account.legalStatus.version,
+                can_mint_nft: account.canMintNFT,
+                digital_signature: account.legalStatus.digitalSignature
+            });
+        } else if (pending) {
+            res.json({
+                status: 'accepted_pending_account',
+                accepted_at: pending.acceptedAt,
+                version: pending.version,
+                next_step: 'create_ecosystem_account'
+            });
+        } else {
+            res.json({
+                status: 'not_accepted',
+                required_agreements: ['ecosystem', 'nft', 'privacy', 'analytics', 'liability'],
+                endpoint: '/api/legal/terms'
+            });
+        }
+    }
+
+    // Ecosystem Account Management
+    async createEcosystemAccount(req, res) {
+        try {
+            const { discordId, username, justTheTipWallet, referralCode } = req.body;
+            
+            // Check if legal agreements are accepted
+            const pendingLegal = this.pendingAgreements.get(discordId);
+            const existingAccount = this.ecosystemAccounts.get(discordId);
+            
+            if (!pendingLegal && (!existingAccount || !existingAccount.legalStatus)) {
+                return res.status(400).json({
+                    success: false,
+                    message: "Legal agreements must be accepted before creating account",
+                    required_endpoint: "/api/legal/accept"
+                });
+            }
+
+            if (existingAccount) {
+                return res.status(400).json({
+                    success: false,
+                    message: "Account already exists for this Discord ID"
+                });
+            }
+
+            // Create new ecosystem account
+            const accountId = crypto.randomBytes(16).toString('hex');
+            const account = {
+                accountId,
+                discordId,
+                username,
+                justTheTipWallet,
+                referralCode,
+                createdAt: new Date(),
+                legalStatus: pendingLegal,
+                canMintNFT: true,
+                trustScore: 0,
+                interactions: [],
+                branchAccess: {
+                    dashboard: true,
+                    strategyCoach: true,
+                    casinoTransparency: true,
+                    betaTracking: true
+                },
+                analytics: {
+                    signups: 1,
+                    moneySaved: 0,
+                    accuracyScore: 0,
+                    lastLogin: new Date(),
+                    totalSessions: 0
+                }
+            };
+
+            this.ecosystemAccounts.set(discordId, account);
+            this.pendingAgreements.delete(discordId); // Clean up pending
+            this.realAnalytics.betaSignups += 1;
+
+            res.json({
+                success: true,
+                message: "Ecosystem account created successfully",
+                accountId,
+                branchAccess: account.branchAccess,
+                canMintNFT: true,
+                next_step: "mint_trust_score_nft"
+            });
+        } catch (error) {
+            console.error('Account creation error:', error);
+            res.status(500).json({ success: false, message: 'Account creation failed' });
+        }
+    }
+
+    async loginEcosystemAccount(req, res) {
+        try {
+            const { discordId, justTheTipWallet } = req.body;
+            const account = this.ecosystemAccounts.get(discordId);
+            
+            if (!account) {
+                return res.status(404).json({
+                    success: false,
+                    message: "Account not found",
+                    action: "create_account"
+                });
+            }
+
+            if (account.justTheTipWallet !== justTheTipWallet) {
+                return res.status(401).json({
+                    success: false,
+                    message: "JustTheTip wallet verification failed"
+                });
+            }
+
+            // Create session token
+            const sessionToken = crypto.randomBytes(32).toString('hex');
+            const session = {
+                accountId: account.accountId,
+                discordId,
+                createdAt: new Date(),
+                expiresAt: new Date(Date.now() + (24 * 60 * 60 * 1000)), // 24 hours
+                branchAccess: account.branchAccess
+            };
+
+            this.accountSessions.set(sessionToken, session);
+            
+            // Update analytics
+            account.analytics.lastLogin = new Date();
+            account.analytics.totalSessions += 1;
+
+            res.json({
+                success: true,
+                sessionToken,
+                accountId: account.accountId,
+                branchAccess: account.branchAccess,
+                trustScore: account.trustScore,
+                message: "Logged in across all ecosystem branches"
+            });
+        } catch (error) {
+            console.error('Login error:', error);
+            res.status(500).json({ success: false, message: 'Login failed' });
+        }
+    }
+
+    getAccountProfile(req, res) {
+        const { discordId } = req.params;
+        const account = this.ecosystemAccounts.get(discordId);
+        
+        if (!account) {
+            return res.status(404).json({
+                success: false,
+                message: "Account not found"
+            });
+        }
+
+        // Get trust score NFT data
+        const nftData = Array.from(this.degensTrustNFTs.values())
+            .find(nft => nft.discordId === discordId);
+
+        res.json({
+            success: true,
+            profile: {
+                accountId: account.accountId,
+                username: account.username,
+                discordId: account.discordId,
+                createdAt: account.createdAt,
+                trustScore: account.trustScore,
+                legalStatus: account.legalStatus.status,
+                branchAccess: account.branchAccess,
+                analytics: account.analytics,
+                nftStatus: nftData ? {
+                    tokenId: nftData.tokenId,
+                    mintedAt: nftData.mintedAt,
+                    verificationFootprint: nftData.verificationFootprint
+                } : null
+            }
+        });
+    }
+
+    async updateAccountProfile(req, res) {
+        try {
+            const { discordId, username, preferences } = req.body;
+            const account = this.ecosystemAccounts.get(discordId);
+            
+            if (!account) {
+                return res.status(404).json({
+                    success: false,
+                    message: "Account not found"
+                });
+            }
+
+            // Update allowed fields
+            if (username) account.username = username;
+            if (preferences) account.preferences = { ...account.preferences, ...preferences };
+            account.lastUpdated = new Date();
+
+            res.json({
+                success: true,
+                message: "Profile updated successfully",
+                profile: {
+                    username: account.username,
+                    preferences: account.preferences,
+                    lastUpdated: account.lastUpdated
+                }
+            });
+        } catch (error) {
+            console.error('Profile update error:', error);
+            res.status(500).json({ success: false, message: 'Profile update failed' });
+        }
+    }
+
+    getNFTRequirements(req, res) {
+        const { discordId } = req.params;
+        const account = this.ecosystemAccounts.get(discordId);
+        const nft = Array.from(this.degensTrustNFTs.values())
+            .find(nft => nft.discordId === discordId);
+        
+        if (nft) {
+            return res.json({
+                status: 'already_minted',
+                nft: {
+                    tokenId: nft.tokenId,
+                    trustScore: nft.trustScore,
+                    mintedAt: nft.mintedAt
+                }
+            });
+        }
+
+        const requirements = {
+            discord_verification: false,
+            legal_agreements: false,
+            ecosystem_account: false,
+            justthetip_wallet: false
+        };
+
+        // Check verification status
+        const verification = this.realAnalytics.verificationEvents.get(discordId);
+        if (verification && verification.verified) {
+            requirements.discord_verification = true;
+        }
+
+        // Check legal agreements
+        if (account && account.legalStatus && account.legalStatus.status === 'completed') {
+            requirements.legal_agreements = true;
+        }
+
+        // Check ecosystem account
+        if (account) {
+            requirements.ecosystem_account = true;
+            if (account.justTheTipWallet) {
+                requirements.justthetip_wallet = true;
+            }
+        }
+
+        const allMet = Object.values(requirements).every(req => req === true);
+
+        res.json({
+            status: allMet ? 'ready_to_mint' : 'requirements_pending',
+            requirements,
+            canMint: allMet,
+            next_steps: allMet ? ['mint_nft'] : this.getNextSteps(requirements)
+        });
+    }
+
+    getNextSteps(requirements) {
+        const steps = [];
+        if (!requirements.discord_verification) steps.push('verify_with_justthetip_bot');
+        if (!requirements.legal_agreements) steps.push('accept_legal_terms');
+        if (!requirements.ecosystem_account) steps.push('create_ecosystem_account');
+        if (!requirements.justthetip_wallet) steps.push('link_justthetip_wallet');
+        return steps;
+    }
+
     // Discord Community Integration
     getDiscordCommunity(req, res) {
         res.json({
@@ -734,31 +1140,74 @@ class EcosystemDashboard {
         return verificationCode && verificationCode.length >= 6;
     }
 
-    // NFT Signature Minting
+    // NFT Signature Minting (with Legal Requirements)
     async mintSignatureNFT(req, res) {
         try {
             const { discordId, contractAccepted, signature } = req.body;
             
-            if (!contractAccepted || !signature) {
+            // 1. Check if user has ecosystem account
+            const account = this.ecosystemAccounts.get(discordId);
+            if (!account) {
                 return res.status(400).json({
                     success: false,
-                    message: "Contract acceptance and signature required"
+                    message: "Ecosystem account required before NFT minting",
+                    required_endpoint: "/api/account/create"
                 });
             }
 
-            // Check if user is verified
+            // 2. Check if legal agreements are completed
+            if (!account.legalStatus || account.legalStatus.status !== 'completed') {
+                return res.status(400).json({
+                    success: false,
+                    message: "Legal agreements must be accepted before NFT minting",
+                    required_endpoint: "/api/legal/accept"
+                });
+            }
+
+            // 3. Check if Discord verification is complete
             const verificationEvent = this.realAnalytics.verificationEvents.get(discordId);
             if (!verificationEvent || !verificationEvent.verified) {
                 return res.status(400).json({
                     success: false,
-                    message: "Discord verification required first"
+                    message: "JustTheTip Discord verification required first",
+                    required_endpoint: "/api/discord/verify"
+                });
+            }
+
+            // 4. Check if JustTheTip wallet is linked
+            if (!account.justTheTipWallet) {
+                return res.status(400).json({
+                    success: false,
+                    message: "JustTheTip wallet must be linked to account"
+                });
+            }
+
+            // 5. Validate contract acceptance and signature
+            if (!contractAccepted || !signature) {
+                return res.status(400).json({
+                    success: false,
+                    message: "Contract acceptance and digital signature required"
+                });
+            }
+
+            // 6. Check if NFT already exists
+            const existingNFT = Array.from(this.degensTrustNFTs.values())
+                .find(nft => nft.discordId === discordId);
+            if (existingNFT) {
+                return res.status(400).json({
+                    success: false,
+                    message: "Trust Score NFT already minted",
+                    existing_nft: {
+                        tokenId: existingNFT.tokenId,
+                        trustScore: existingNFT.trustScore
+                    }
                 });
             }
 
             // Generate NFT token ID
             const tokenId = this.generateNFTTokenId(discordId);
             
-            // Create trust score NFT entry
+            // Create comprehensive trust score NFT entry
             const nftData = {
                 tokenId,
                 discordId,
@@ -766,32 +1215,60 @@ class EcosystemDashboard {
                 mintedAt: new Date(),
                 contractSigned: true,
                 signature,
-                trustScore: 100, // Base score for contract signing
+                justTheTipWallet: account.justTheTipWallet,
+                trustScore: 100, // Base score for completing all requirements
                 verificationFootprint: [
                     {
-                        event: "discord_verification",
-                        timestamp: verificationEvent.timestamp,
-                        method: "JustTheTip"
+                        event: "legal_agreements_accepted",
+                        timestamp: account.legalStatus.acceptedAt,
+                        agreements: ['ecosystem', 'nft', 'privacy', 'analytics', 'liability'],
+                        signature: account.legalStatus.digitalSignature
                     },
                     {
-                        event: "contract_signature",
+                        event: "discord_verification", 
+                        timestamp: verificationEvent.timestamp,
+                        method: "JustTheTip",
+                        verified: true
+                    },
+                    {
+                        event: "ecosystem_account_created",
+                        timestamp: account.createdAt,
+                        accountId: account.accountId
+                    },
+                    {
+                        event: "nft_signature_contract",
                         timestamp: new Date(),
+                        signature,
                         verified: true
                     }
                 ]
             };
 
+            // Store NFT and update account
             this.degensTrustNFTs.set(tokenId, nftData);
             this.realAnalytics.nftMintingEvents.set(discordId, nftData);
+            account.trustScore = 100;
+            account.nftTokenId = tokenId;
+
+            // Track across admin analytics
+            this.realAnalytics.betaSignups += 1;
 
             res.json({
                 success: true,
-                message: "Signature NFT minted successfully",
+                message: "Degens Trust Score NFT minted successfully",
                 nft: {
                     tokenId,
                     type: "Degens Trust Score Foundation",
                     trustScore: 100,
-                    footprint: "Blockchain verification of contract signature and Discord verification"
+                    discordLinked: discordId,
+                    walletLinked: account.justTheTipWallet,
+                    footprint: "Complete ecosystem verification: Legal agreements, Discord verification, account creation, and signature contract",
+                    branchAccess: "Full access to all TiltCheck ecosystem branches"
+                },
+                account: {
+                    accountId: account.accountId,
+                    branchAccess: account.branchAccess,
+                    canUseAllFeatures: true
                 }
             });
         } catch (error) {
