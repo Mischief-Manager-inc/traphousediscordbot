@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TiltCheck Ecosystem Hub | TiltCheck.it.com</title>
+    <meta name="description" content="Complete overview of the TiltCheck ecosystem - gaming, monitoring, NFTs, Discord bots, and responsible gaming tools.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #ffffff;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 40px 0;
+            border-bottom: 2px solid #00ff88;
+        }
+        
+        .logo {
+            font-size: 2.8rem;
+            font-weight: bold;
+            color: #00ff88;
+            text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+            margin-bottom: 10px;
+        }
+        
+        .tagline {
+            font-size: 1.3rem;
+            color: #ff6b35;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+        
+        .description {
+            font-size: 1.2rem;
+            color: #cccccc;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .ecosystem-overview {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            text-align: center;
+        }
+        
+        .ecosystem-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+        }
+        
+        .stat-number {
+            font-size: 2.2rem;
+            color: #00ff88;
+            font-weight: bold;
+            display: block;
+        }
+        
+        .stat-label {
+            color: #cccccc;
+            font-size: 0.9rem;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .product-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            border-color: #00ff88;
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.2);
+        }
+        
+        .product-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .product-icon {
+            font-size: 2.8rem;
+            margin-right: 15px;
+        }
+        
+        .product-title {
+            color: #00ff88;
+            font-size: 1.6rem;
+            font-weight: bold;
+        }
+        
+        .product-status {
+            margin-left: auto;
+            padding: 6px 14px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .status-live {
+            background: rgba(0, 255, 136, 0.2);
+            color: #00ff88;
+        }
+        
+        .status-dev {
+            background: rgba(255, 107, 53, 0.2);
+            color: #ff6b35;
+        }
+        
+        .status-beta {
+            background: rgba(255, 193, 7, 0.2);
+            color: #ffc107;
+        }
+        
+        .status-concept {
+            background: rgba(156, 39, 176, 0.2);
+            color: #9c27b0;
+        }
+        
+        .product-description {
+            color: #cccccc;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-size: 1.05rem;
+        }
+        
+        .product-features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+        
+        .product-features li {
+            color: #ffffff;
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .product-features li:before {
+            content: "⚡";
+            position: absolute;
+            left: 0;
+            color: #00ff88;
+        }
+        
+        .product-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin: 5px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, #00ff88, #ff6b35);
+            color: #000;
+        }
+        
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 255, 136, 0.4);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid #00ff88;
+            color: #00ff88;
+        }
+        
+        .btn-secondary:hover {
+            background: #00ff88;
+            color: #000;
+        }
+        
+        .integration-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 107, 53, 0.3);
+        }
+        
+        .section-title {
+            color: #ff6b35;
+            font-size: 1.9rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .integration-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .integration-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            text-align: center;
+        }
+        
+        .integration-card h3 {
+            color: #ff6b35;
+            margin-bottom: 10px;
+        }
+        
+        .integration-card p {
+            color: #cccccc;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+        
+        .roadmap-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(156, 39, 176, 0.3);
+        }
+        
+        .roadmap-timeline {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .timeline-item {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            padding: 25px;
+            border: 1px solid rgba(156, 39, 176, 0.2);
+            position: relative;
+        }
+        
+        .timeline-quarter {
+            color: #9c27b0;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .timeline-title {
+            color: #ffffff;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .timeline-desc {
+            color: #cccccc;
+            font-size: 0.9rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 40px 0;
+            padding: 20px 0;
+            border-top: 1px solid rgba(0, 255, 136, 0.3);
+        }
+        
+        .nav-links a {
+            color: #00ff88;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 15px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            background: rgba(0, 255, 136, 0.1);
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.8);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            border-top: 2px solid #00ff88;
+            margin-top: 40px;
+        }
+        
+        .footer-motto {
+            font-size: 1.3rem;
+            color: #ff6b35;
+            margin-bottom: 15px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .footer-links a {
+            color: #00ff88;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .footer-links a:hover {
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">🌐 TiltCheck Ecosystem</div>
+            <div class="tagline">"Degenerate in Gaming, Responsible in Life"</div>
+            <div class="description">Complete gaming ecosystem with responsible monitoring, community tools, NFT integration, and transparent casino analysis - all powered by AI and blockchain technology.</div>
+        </header>
+
+        <section class="ecosystem-overview">
+            <h2>🚀 Welcome to the Future of Responsible Gaming</h2>
+            <p style="color: #cccccc; margin: 20px 0; font-size: 1.15rem;">
+                TiltCheck is more than just a monitoring system - it's a complete ecosystem designed to enhance your gaming experience while promoting responsible behavior. From AI-powered tilt detection to community-driven casino verification, we're building the tools gamers actually want to use.
+            </p>
+            
+            <div class="ecosystem-stats">
+                <div class="stat-card">
+                    <span class="stat-number">10+</span>
+                    <span class="stat-label">Core Products</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">5,000+</span>
+                    <span class="stat-label">Active Users</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">25+</span>
+                    <span class="stat-label">Discord Servers</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">99.7%</span>
+                    <span class="stat-label">Uptime</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="products-grid">
+            <div class="product-card">
+                <div class="product-header">
+                    <div class="product-icon">🎯</div>
+                    <div>
+                        <div class="product-title">TiltCheck Monitor</div>
+                    </div>
+                    <div class="product-status status-dev">In Development</div>
+                </div>
+                <div class="product-description">
+                    AI-powered gambling behavior analysis that helps you understand your gaming patterns and promotes responsible play through real-time monitoring and personalized insights.
+                </div>
+                <ul class="product-features">
+                    <li>Real-time tilt detection and alerts</li>
+                    <li>Personalized gambling pattern analysis</li>
+                    <li>Responsible gaming intervention tools</li>
+                    <li>Historical behavior tracking</li>
+                    <li>Community support integration</li>
+                </ul>
+                <div class="product-actions">
+                    <a href="/tiltcheck.html" class="btn btn-primary">Learn More</a>
+                    <a href="/beta.html" class="btn btn-secondary">Join Beta</a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-header">
+                    <div class="product-icon">🎰</div>
+                    <div>
+                        <div class="product-title">Casino Transparency</div>
+                    </div>
+                    <div class="product-status status-dev">In Development</div>
+                </div>
+                <div class="product-description">
+                    Community-verified casino ratings and transparency reports that help you make informed decisions about where to play, featuring real user reviews and blockchain-verified audits.
+                </div>
+                <ul class="product-features">
+                    <li>Community-driven casino ratings</li>
+                    <li>Transparent payout verification</li>
+                    <li>Real user review system</li>
+                    <li>Regulatory compliance tracking</li>
+                    <li>Scam prevention alerts</li>
+                </ul>
+                <div class="product-actions">
+                    <a href="/casinos.html" class="btn btn-primary">View Analysis</a>
+                    <a href="/compliance.html" class="btn btn-secondary">Compliance Info</a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-header">
+                    <div class="product-icon">🤖</div>
+                    <div>
+                        <div class="product-title">Discord Bot Suite</div>
+                    </div>
+                    <div class="product-status status-live">Live</div>
+                </div>
+                <div class="product-description">
+                    Complete Discord bot ecosystem featuring gaming tools, moderation features, crypto tipping, and community management - all integrated with our monitoring systems.
+                </div>
+                <ul class="product-features">
+                    <li>TrapHouse gaming bot with monitoring</li>
+                    <li>Crypto tipping and wallet management</li>
+                    <li>Community moderation tools</li>
+                    <li>Entertainment and casino games</li>
+                    <li>Cross-server reputation tracking</li>
+                </ul>
+                <div class="product-actions">
+                    <a href="/discordbots.html" class="btn btn-primary">View Bots</a>
+                    <a href="/bot.html" class="btn btn-secondary">Invite Bot</a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-header">
+                    <div class="product-icon">🃏</div>
+                    <div>
+                        <div class="product-title">Degens Card Game</div>
+                    </div>
+                    <div class="product-status status-beta">Beta</div>
+                </div>
+                <div class="product-description">
+                    Strategic card game with NFT integration, featuring community tournaments, deck building, and cross-platform play - where degenerate humor meets serious strategy.
+                </div>
+                <ul class="product-features">
+                    <li>Strategic gameplay with NFT cards</li>
+                    <li>Community tournaments and rankings</li>
+                    <li>Custom deck building system</li>
+                    <li>Cross-platform Discord integration</li>
+                    <li>Blockchain-based card ownership</li>
+                </ul>
+                <div class="product-actions">
+                    <a href="/degensagainstdecency.html" class="btn btn-primary">Play Game</a>
+                    <a href="/nft.html" class="btn btn-secondary">View NFTs</a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-header">
+                    <div class="product-icon">📊</div>
+                    <div>
+                        <div class="product-title">Trust Score System</div>
+                    </div>
+                    <div class="product-status status-concept">Concept</div>
+                </div>
+                <div class="product-description">
+                    Blockchain-verified reputation scoring system that tracks your gaming behavior and community interactions to create a verifiable trust profile.
+                </div>
+                <ul class="product-features">
+                    <li>Blockchain-verified reputation scores</li>
+                    <li>Multi-factor behavior analysis</li>
+                    <li>Cross-platform integration</li>
+                    <li>Privacy-preserving verification</li>
+                    <li>Community governance participation</li>
+                </ul>
+                <div class="product-actions">
+                    <a href="/degentrustscore.html" class="btn btn-primary">Learn More</a>
+                    <a href="/whitepaper.html" class="btn btn-secondary">Technical Details</a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-header">
+                    <div class="product-icon">🔍</div>
+                    <div>
+                        <div class="product-title">SusLink Detection</div>
+                    </div>
+                    <div class="product-status status-dev">In Development</div>
+                </div>
+                <div class="product-description">
+                    Community-powered link verification and safety system that protects Discord servers from scams, phishing, and malicious content through AI and crowd-sourced intelligence.
+                </div>
+                <ul class="product-features">
+                    <li>AI-powered threat detection</li>
+                    <li>Community reporting system</li>
+                    <li>Real-time link scanning</li>
+                    <li>Automatic Discord protection</li>
+                    <li>Threat intelligence database</li>
+                </ul>
+                <div class="product-actions">
+                    <a href="/suslink.html" class="btn btn-primary">View System</a>
+                    <a href="/beta.html" class="btn btn-secondary">Request Access</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="integration-section">
+            <h2 class="section-title">🔗 Ecosystem Integration</h2>
+            <p style="text-align: center; color: #cccccc; margin-bottom: 30px; font-size: 1.1rem;">
+                All our products work together seamlessly to create a unified gaming experience
+            </p>
+            
+            <div class="integration-grid">
+                <div class="integration-card">
+                    <h3>🎮 Unified Gaming Profile</h3>
+                    <p>Your behavior data, trust score, and achievements follow you across all games and platforms in our ecosystem.</p>
+                    <a href="/degentrustscore.html" class="btn btn-secondary">View Trust System</a>
+                </div>
+                
+                <div class="integration-card">
+                    <h3>💬 Discord Connectivity</h3>
+                    <p>All monitoring, gaming, and community features integrate directly with your Discord servers and communities.</p>
+                    <a href="https://discord.gg/betcollective" target="_blank" class="btn btn-secondary">Join Discord</a>
+                </div>
+                
+                <div class="integration-card">
+                    <h3>🔗 Blockchain Verification</h3>
+                    <p>Trust scores, NFT ownership, and achievement records are stored on blockchain for transparency and portability.</p>
+                    <a href="/compliance.html" class="btn btn-secondary">Learn More</a>
+                </div>
+                
+                <div class="integration-card">
+                    <h3>🎯 AI-Powered Insights</h3>
+                    <p>Machine learning algorithms analyze your behavior across all platforms to provide personalized recommendations and alerts.</p>
+                    <a href="/tiltcheck.html" class="btn btn-secondary">View Monitoring</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="roadmap-section">
+            <h2 class="section-title" style="color: #9c27b0;">🗺️ Ecosystem Roadmap</h2>
+            <p style="text-align: center; color: #cccccc; margin-bottom: 30px; font-size: 1.1rem;">
+                Our development timeline for building the complete responsible gaming ecosystem
+            </p>
+            
+            <div class="roadmap-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-quarter">Q1 2025</div>
+                    <div class="timeline-title">🚀 Beta Launch</div>
+                    <div class="timeline-desc">TiltCheck Monitor beta, Discord bot enhancements, community feedback integration, and initial casino transparency reports.</div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-quarter">Q2 2025</div>
+                    <div class="timeline-title">🎨 NFT & Gaming</div>
+                    <div class="timeline-desc">NFT collection launch, Degens card game public release, SusLink detection system, and expanded Discord integrations.</div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-quarter">Q3 2025</div>
+                    <div class="timeline-title">🔗 Blockchain Integration</div>
+                    <div class="timeline-desc">Trust score system implementation, blockchain verification, governance token launch, and cross-platform integrations.</div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-quarter">Q4 2025</div>
+                    <div class="timeline-title">🌐 Global Expansion</div>
+                    <div class="timeline-desc">Mobile app launch, additional gaming platform integrations, international compliance, and ecosystem partnerships.</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="integration-section">
+            <h2 class="section-title">🎯 Get Started Today</h2>
+            <div style="text-align: center;">
+                <p style="color: #cccccc; margin-bottom: 30px; font-size: 1.1rem;">
+                    Choose your entry point into the TiltCheck ecosystem
+                </p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 30px 0;">
+                    <div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 15px; border: 1px solid rgba(0, 255, 136, 0.3);">
+                        <div style="font-size: 2.5rem; margin-bottom: 15px;">🎮</div>
+                        <h3 style="color: #00ff88; margin-bottom: 15px;">For Gamers</h3>
+                        <p style="color: #cccccc; margin-bottom: 20px;">Join our Discord, try the card game, and get early access to monitoring tools.</p>
+                        <a href="https://discord.gg/betcollective" target="_blank" class="btn btn-primary">Join Community</a>
+                    </div>
+                    
+                    <div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 15px; border: 1px solid rgba(0, 255, 136, 0.3);">
+                        <div style="font-size: 2.5rem; margin-bottom: 15px;">🤖</div>
+                        <h3 style="color: #00ff88; margin-bottom: 15px;">For Server Owners</h3>
+                        <p style="color: #cccccc; margin-bottom: 20px;">Add our bots to enhance your Discord community with gaming and moderation tools.</p>
+                        <a href="/discordbots.html" class="btn btn-primary">Add Bots</a>
+                    </div>
+                    
+                    <div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 15px; border: 1px solid rgba(0, 255, 136, 0.3);">
+                        <div style="font-size: 2.5rem; margin-bottom: 15px;">💰</div>
+                        <h3 style="color: #00ff88; margin-bottom: 15px;">For Investors</h3>
+                        <p style="color: #cccccc; margin-bottom: 20px;">Review our pitch deck and learn about the business opportunity in responsible gaming.</p>
+                        <a href="/pitch-deck.html" class="btn btn-primary">View Pitch</a>
+                    </div>
+                    
+                    <div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 15px; border: 1px solid rgba(0, 255, 136, 0.3);">
+                        <div style="font-size: 2.5rem; margin-bottom: 15px;">🧪</div>
+                        <h3 style="color: #00ff88; margin-bottom: 15px;">For Beta Testers</h3>
+                        <p style="color: #cccccc; margin-bottom: 20px;">Get early access to new features and help shape the future of the ecosystem.</p>
+                        <a href="/beta.html" class="btn btn-primary">Join Beta</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <nav class="nav-links">
+            <a href="/index.html">🏠 Home</a>
+            <a href="/tiltcheck.html">🎯 TiltCheck</a>
+            <a href="/casinos.html">🎰 Casinos</a>
+            <a href="/discordbots.html">🤖 Discord Bots</a>
+            <a href="/degensagainstdecency.html">🃏 Card Game</a>
+            <a href="/nft.html">🎨 NFTs</a>
+            <a href="/sitemap.html">🗺️ Sitemap</a>
+        </nav>
+
+        <footer>
+            <div class="footer-motto">Degenerate in Gaming, Responsible in Life ❤️</div>
+            <div class="footer-links">
+                <a href="/index.html">Home</a>
+                <a href="https://github.com/jmenichole/trap-house-discord-bot" target="_blank">GitHub</a>
+                <a href="https://ko-fi.com/jmenichole0" target="_blank">Ko-fi</a>
+                <a href="https://discord.gg/betcollective" target="_blank">Discord</a>
+                <a href="/pitch-deck.html">Pitch Deck</a>
+            </div>
+            <div style="color: #666; font-size: 0.9rem;">
+                © 2025 TiltCheck.it.com | Complete Gaming Ecosystem
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
