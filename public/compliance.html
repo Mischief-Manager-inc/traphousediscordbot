@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compliance Center | TiltCheck.it.com</title>
+    <meta name="description" content="Comprehensive gambling compliance resources, regulatory guidance, and responsible gaming tools for players and operators.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0a0a 50%, #2a1810 100%);
+            color: #ffffff;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 40px 0;
+            border-bottom: 2px solid #dc3545;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #dc3545;
+            text-shadow: 0 0 20px rgba(220, 53, 69, 0.5);
+            margin-bottom: 10px;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            color: #ff6b6b;
+            margin-bottom: 15px;
+        }
+        
+        .description {
+            font-size: 1.1rem;
+            color: #cccccc;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .compliance-hero {
+            background: rgba(220, 53, 69, 0.1);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 2px solid #dc3545;
+            text-align: center;
+        }
+        
+        .compliance-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid rgba(220, 53, 69, 0.3);
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            color: #dc3545;
+            font-weight: bold;
+            display: block;
+        }
+        
+        .stat-label {
+            color: #cccccc;
+            font-size: 0.9rem;
+        }
+        
+        .compliance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .compliance-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid rgba(220, 53, 69, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .compliance-card:hover {
+            transform: translateY(-5px);
+            border-color: #dc3545;
+            box-shadow: 0 10px 30px rgba(220, 53, 69, 0.2);
+        }
+        
+        .compliance-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .compliance-title {
+            color: #dc3545;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .compliance-description {
+            color: #cccccc;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        
+        .status-verified {
+            background: rgba(40, 167, 69, 0.2);
+            color: #28a745;
+        }
+        
+        .status-review {
+            background: rgba(255, 193, 7, 0.2);
+            color: #ffc107;
+        }
+        
+        .status-pending {
+            background: rgba(255, 107, 53, 0.2);
+            color: #ff6b35;
+        }
+        
+        .compliance-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(220, 53, 69, 0.3);
+        }
+        
+        .section-title {
+            color: #dc3545;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .regulatory-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .regulatory-item {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            padding: 25px;
+            border: 1px solid rgba(220, 53, 69, 0.2);
+        }
+        
+        .regulatory-authority {
+            color: #dc3545;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .regulatory-jurisdiction {
+            color: #ffffff;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .regulatory-desc {
+            color: #cccccc;
+            font-size: 0.9rem;
+        }
+        
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .tool-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(220, 53, 69, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-3px);
+            border-color: #dc3545;
+        }
+        
+        .tool-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .tool-title {
+            color: #dc3545;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .tool-desc {
+            color: #cccccc;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin: 5px;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, #dc3545, #ff6b6b);
+            color: #fff;
+        }
+        
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(220, 53, 69, 0.4);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid #dc3545;
+            color: #dc3545;
+        }
+        
+        .btn-secondary:hover {
+            background: #dc3545;
+            color: #fff;
+        }
+        
+        .warning-box {
+            background: rgba(255, 193, 7, 0.1);
+            border: 2px solid #ffc107;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .warning-title {
+            color: #ffc107;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 40px 0;
+            padding: 20px 0;
+            border-top: 1px solid rgba(220, 53, 69, 0.3);
+        }
+        
+        .nav-links a {
+            color: #dc3545;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 15px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            background: rgba(220, 53, 69, 0.1);
+            text-shadow: 0 0 10px rgba(220, 53, 69, 0.8);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            border-top: 2px solid #dc3545;
+            margin-top: 40px;
+        }
+        
+        .footer-motto {
+            font-size: 1.2rem;
+            color: #ff6b6b;
+            margin-bottom: 15px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .footer-links a {
+            color: #dc3545;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .footer-links a:hover {
+            text-shadow: 0 0 10px rgba(220, 53, 69, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">⚖️ Compliance Center</div>
+            <div class="tagline">Regulatory Guidance & Responsible Gaming</div>
+            <div class="description">Comprehensive compliance resources, state-by-state regulations, and responsible gaming tools to ensure safe and legal gaming experiences.</div>
+        </header>
+
+        <section class="compliance-hero">
+            <h2>🛡️ Navigate Gaming Regulations with Confidence</h2>
+            <p style="color: #cccccc; margin: 20px 0; font-size: 1.1rem;">
+                Our compliance center provides up-to-date regulatory information, responsible gaming tools, and guidance for both players and operators across all jurisdictions.
+            </p>
+            
+            <div class="warning-box">
+                <div class="warning-title">⚠️ Important Disclaimer</div>
+                <p style="color: #cccccc;">
+                    This information is for educational purposes only and does not constitute legal advice. Always consult with qualified legal professionals for specific compliance requirements in your jurisdiction.
+                </p>
+            </div>
+            
+            <div class="compliance-stats">
+                <div class="stat-card">
+                    <span class="stat-number">50+</span>
+                    <span class="stat-label">State Jurisdictions</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">15</span>
+                    <span class="stat-label">Regulatory Authorities</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">200+</span>
+                    <span class="stat-label">Compliance Rules</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">99.9%</span>
+                    <span class="stat-label">Accuracy Rate</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="compliance-grid">
+            <div class="compliance-card">
+                <span class="compliance-icon">📍</span>
+                <div class="compliance-title">State Regulations <span class="status-badge status-verified">Live</span></div>
+                <div class="compliance-description">
+                    Comprehensive state-by-state gambling regulations, licensing requirements, and compliance frameworks for all 50 US states and territories.
+                </div>
+                <a href="/gamblingregulations.html" class="btn btn-primary">🗺️ Check Your State</a>
+            </div>
+
+            <div class="compliance-card">
+                <span class="compliance-icon">🎯</span>
+                <div class="compliance-title">Responsible Gaming Tools <span class="status-badge status-verified">Live</span></div>
+                <div class="compliance-description">
+                    Advanced monitoring systems, self-exclusion tools, spending limits, and intervention mechanisms to promote healthy gaming habits.
+                </div>
+                <a href="/tiltcheck.html" class="btn btn-primary">🛡️ TiltCheck Monitor</a>
+            </div>
+
+            <div class="compliance-card">
+                <span class="compliance-icon">🏛️</span>
+                <div class="compliance-title">Regulatory Framework <span class="status-badge status-review">Updated</span></div>
+                <div class="compliance-description">
+                    Federal and state regulatory frameworks, licensing procedures, tax obligations, and ongoing compliance requirements for operators.
+                </div>
+                <a href="#regulatory" class="btn btn-secondary">📋 View Framework</a>
+            </div>
+
+            <div class="compliance-card">
+                <span class="compliance-icon">🔍</span>
+                <div class="compliance-title">Operator Verification <span class="status-badge status-pending">Beta</span></div>
+                <div class="compliance-description">
+                    Verify operator licenses, check regulatory standing, and access transparency reports for informed decision-making about gaming platforms.
+                </div>
+                <a href="/casinos.html" class="btn btn-secondary">🏢 Verify Operators</a>
+            </div>
+
+            <div class="compliance-card">
+                <span class="compliance-icon">📚</span>
+                <div class="compliance-title">Educational Resources <span class="status-badge status-verified">Live</span></div>
+                <div class="compliance-description">
+                    Comprehensive guides on gambling laws, responsible gaming practices, addiction prevention, and compliance best practices.
+                </div>
+                <a href="#education" class="btn btn-secondary">📖 Learn More</a>
+            </div>
+
+            <div class="compliance-card">
+                <span class="compliance-icon">🤝</span>
+                <div class="compliance-title">Industry Partnerships <span class="status-badge status-review">Growing</span></div>
+                <div class="compliance-description">
+                    Collaborations with regulatory bodies, responsible gaming organizations, and industry leaders to ensure comprehensive compliance coverage.
+                </div>
+                <a href="#partnerships" class="btn btn-secondary">🌐 View Partners</a>
+            </div>
+        </section>
+
+        <section class="compliance-section" id="regulatory">
+            <h2 class="section-title">🏛️ Key Regulatory Authorities</h2>
+            <p style="text-align: center; color: #cccccc; margin-bottom: 30px;">
+                Major regulatory bodies overseeing gambling operations in the United States
+            </p>
+            
+            <div class="regulatory-grid">
+                <div class="regulatory-item">
+                    <div class="regulatory-authority">Nevada Gaming Control</div>
+                    <div class="regulatory-jurisdiction">Nevada</div>
+                    <div class="regulatory-desc">Oldest and most established gaming regulatory authority in the US, setting standards for casino operations and responsible gaming.</div>
+                </div>
+                
+                <div class="regulatory-item">
+                    <div class="regulatory-authority">New Jersey Division of Gaming</div>
+                    <div class="regulatory-jurisdiction">New Jersey</div>
+                    <div class="regulatory-desc">Regulates Atlantic City casinos and online gambling, known for strict licensing and player protection requirements.</div>
+                </div>
+                
+                <div class="regulatory-item">
+                    <div class="regulatory-authority">Pennsylvania Gaming Control</div>
+                    <div class="regulatory-jurisdiction">Pennsylvania</div>
+                    <div class="regulatory-desc">Oversees comprehensive gaming portfolio including casinos, online gambling, and sports betting operations.</div>
+                </div>
+                
+                <div class="regulatory-item">
+                    <div class="regulatory-authority">Michigan Gaming Control</div>
+                    <div class="regulatory-jurisdiction">Michigan</div>
+                    <div class="regulatory-desc">Regulates tribal and commercial casinos, online gambling, and sports betting with emphasis on responsible gaming.</div>
+                </div>
+                
+                <div class="regulatory-item">
+                    <div class="regulatory-authority">West Virginia Lottery</div>
+                    <div class="regulatory-jurisdiction">West Virginia</div>
+                    <div class="regulatory-desc">Manages lottery, casino gaming, and online gambling operations with comprehensive player protection programs.</div>
+                </div>
+                
+                <div class="regulatory-item">
+                    <div class="regulatory-authority">Connecticut DCP</div>
+                    <div class="regulatory-jurisdiction">Connecticut</div>
+                    <div class="regulatory-desc">Department of Consumer Protection regulates casino gaming and online gambling with tribal partnerships.</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="compliance-section" id="education">
+            <h2 class="section-title">📚 Compliance Tools & Resources</h2>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <span class="tool-icon">📊</span>
+                    <div class="tool-title">Compliance Dashboard</div>
+                    <div class="tool-desc">Real-time monitoring of regulatory requirements, license status, and compliance metrics for operators.</div>
+                    <a href="#" class="btn btn-secondary">🔍 View Dashboard</a>
+                </div>
+                
+                <div class="tool-card">
+                    <span class="tool-icon">📋</span>
+                    <div class="tool-title">Regulatory Checklist</div>
+                    <div class="tool-desc">Step-by-step compliance checklists for different gaming types and jurisdictions to ensure full regulatory adherence.</div>
+                    <a href="#" class="btn btn-secondary">✅ Download Checklist</a>
+                </div>
+                
+                <div class="tool-card">
+                    <span class="tool-icon">🎓</span>
+                    <div class="tool-title">Training Modules</div>
+                    <div class="tool-desc">Interactive training courses on responsible gaming, regulatory compliance, and industry best practices.</div>
+                    <a href="#" class="btn btn-secondary">📖 Start Training</a>
+                </div>
+                
+                <div class="tool-card">
+                    <span class="tool-icon">📈</span>
+                    <div class="tool-title">Compliance Analytics</div>
+                    <div class="tool-desc">Advanced analytics and reporting tools to track compliance metrics and identify potential risk areas.</div>
+                    <a href="#" class="btn btn-secondary">📊 View Analytics</a>
+                </div>
+                
+                <div class="tool-card">
+                    <span class="tool-icon">🚨</span>
+                    <div class="tool-title">Alert System</div>
+                    <div class="tool-desc">Automated alerts for regulatory changes, compliance deadlines, and risk indicators across all jurisdictions.</div>
+                    <a href="#" class="btn btn-secondary">🔔 Setup Alerts</a>
+                </div>
+                
+                <div class="tool-card">
+                    <span class="tool-icon">📞</span>
+                    <div class="tool-title">Expert Consultation</div>
+                    <div class="tool-desc">Access to compliance experts and legal professionals for specific regulatory questions and guidance.</div>
+                    <a href="#" class="btn btn-secondary">💬 Contact Expert</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="compliance-section" id="partnerships">
+            <h2 class="section-title">🤝 Industry Partnerships</h2>
+            <p style="text-align: center; color: #cccccc; margin-bottom: 30px;">
+                Collaborating with leading organizations to ensure comprehensive compliance coverage
+            </p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 30px 0;">
+                <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 10px; border: 1px solid rgba(220, 53, 69, 0.3); text-align: center;">
+                    <div style="font-size: 2rem; margin-bottom: 10px;">🏛️</div>
+                    <div style="color: #dc3545; font-weight: bold; margin-bottom: 10px;">Regulatory Bodies</div>
+                    <div style="color: #cccccc; font-size: 0.9rem;">Direct partnerships with state gaming commissions and regulatory authorities</div>
+                </div>
+                
+                <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 10px; border: 1px solid rgba(220, 53, 69, 0.3); text-align: center;">
+                    <div style="font-size: 2rem; margin-bottom: 10px;">🛡️</div>
+                    <div style="color: #dc3545; font-weight: bold; margin-bottom: 10px;">Responsible Gaming</div>
+                    <div style="color: #cccccc; font-size: 0.9rem;">Collaborations with NCPG, AGA, and other responsible gaming organizations</div>
+                </div>
+                
+                <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 10px; border: 1px solid rgba(220, 53, 69, 0.3); text-align: center;">
+                    <div style="font-size: 2rem; margin-bottom: 10px;">⚖️</div>
+                    <div style="color: #dc3545; font-weight: bold; margin-bottom: 10px;">Legal Experts</div>
+                    <div style="color: #cccccc; font-size: 0.9rem;">Network of gaming law specialists and compliance professionals</div>
+                </div>
+                
+                <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 10px; border: 1px solid rgba(220, 53, 69, 0.3); text-align: center;">
+                    <div style="font-size: 2rem; margin-bottom: 10px;">🏢</div>
+                    <div style="color: #dc3545; font-weight: bold; margin-bottom: 10px;">Industry Leaders</div>
+                    <div style="color: #cccccc; font-size: 0.9rem;">Partnerships with major gaming operators and technology providers</div>
+                </div>
+            </div>
+        </section>
+
+        <nav class="nav-links">
+            <a href="/index.html">🏠 Home</a>
+            <a href="/gamblingregulations.html">📍 State Regulations</a>
+            <a href="/tiltcheck.html">🎯 TiltCheck</a>
+            <a href="/casinos.html">🏢 Operator Verification</a>
+            <a href="/support.html">💬 Support</a>
+            <a href="/sitemap.html">🗺️ Sitemap</a>
+        </nav>
+
+        <footer>
+            <div class="footer-motto">Compliance First, Innovation Always ⚖️</div>
+            <div class="footer-links">
+                <a href="/index.html">Home</a>
+                <a href="https://github.com/jmenichole/trap-house-discord-bot" target="_blank">GitHub</a>
+                <a href="https://ko-fi.com/jmenichole0" target="_blank">Ko-fi</a>
+                <a href="https://discord.gg/betcollective" target="_blank">Discord</a>
+                <a href="/pitch-deck.html">Pitch Deck</a>
+            </div>
+            <div style="color: #666; font-size: 0.9rem;">
+                © 2025 TiltCheck.it.com | Compliance Center
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

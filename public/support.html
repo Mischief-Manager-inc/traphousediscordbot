@@ -3,304 +3,404 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Support TrapHouse Discord Bot - Tools for responsible gambling, accountability, and community support">
-    <meta name="keywords" content="discord bot, gambling accountability, tiltcheck, crypto g                <a href="https://discord.com/oauth2/authorize?client_id=1354450590813655142" target="_blank" class="beta-btn">
-                    💬 Join Discord Community
-                </a>ance, responsible gaming">
-    <meta name="author" content="jmenichole">
-    <meta property="og:title" content="TrapHouse Discord Bot - Support Page">
-    <meta property="og:description" content="Made for degens by degens who learned the hard way. Supporting responsible gambling & community accountability.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://yourdomain.com/public/support.html">
-    <title>TrapHouse Discord Bot - Support Page</title>
+    <title>Support Center | TiltCheck.it.com</title>
+    <meta name="description" content="Community support, documentation, and help resources for the TiltCheck ecosystem and responsible gaming tools.">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            margin: 0;
-            padding: 20px;
+            background: linear-gradient(135deg, #0a0a0a 0%, #0a1a0a 50%, #1a2810 100%);
+            color: #ffffff;
+            line-height: 1.6;
             min-height: 100vh;
-            color: white;
         }
         
         .container {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            padding: 20px;
         }
         
-        .header {
+        header {
             text-align: center;
             margin-bottom: 40px;
+            padding: 40px 0;
+            border-bottom: 2px solid #28a745;
         }
         
-        .header h1 {
-            font-size: 3em;
-            margin: 0;
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #28a745;
+            text-shadow: 0 0 20px rgba(40, 167, 69, 0.5);
+            margin-bottom: 10px;
         }
         
-        .header p {
-            font-size: 1.2em;
-            margin: 10px 0;
-            opacity: 0.9;
+        .tagline {
+            font-size: 1.2rem;
+            color: #5cb85c;
+            margin-bottom: 15px;
         }
         
-        .support-section {
-            background: rgba(255, 255, 255, 0.1);
+        .description {
+            font-size: 1.1rem;
+            color: #cccccc;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .support-hero {
+            background: rgba(40, 167, 69, 0.1);
             border-radius: 15px;
-            padding: 30px;
-            margin: 20px 0;
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 2px solid #28a745;
+            text-align: center;
         }
         
-        .support-section h2 {
-            color: #4ecdc4;
-            margin-bottom: 20px;
-            font-size: 1.8em;
-        }
-        
-        .support-links {
+        .support-stats {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
-            margin: 20px 0;
+            margin: 30px 0;
         }
         
-        .support-card {
-            background: rgba(255, 255, 255, 0.1);
+        .stat-card {
+            background: rgba(255, 255, 255, 0.03);
             border-radius: 10px;
             padding: 20px;
             text-align: center;
-            transition: transform 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(40, 167, 69, 0.3);
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            color: #28a745;
+            font-weight: bold;
+            display: block;
+        }
+        
+        .stat-label {
+            color: #cccccc;
+            font-size: 0.9rem;
+        }
+        
+        .support-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .support-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid rgba(40, 167, 69, 0.3);
+            transition: all 0.3s ease;
         }
         
         .support-card:hover {
             transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.15);
+            border-color: #28a745;
+            box-shadow: 0 10px 30px rgba(40, 167, 69, 0.2);
         }
         
-        .support-card a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.1em;
-        }
-        
-        .support-card a:hover {
-            color: #4ecdc4;
-        }
-        
-        .support-card a:focus {
-            outline: 2px solid #4ecdc4;
-            outline-offset: 2px;
-        }
-        
-        .support-card .emoji {
-            font-size: 2em;
+        .support-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
             display: block;
-            margin-bottom: 10px;
         }
         
-        .features {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 30px;
-            margin: 20px 0;
-        }
-        
-        .features h3 {
-            color: #ff6b6b;
+        .support-title {
+            color: #28a745;
+            font-size: 1.3rem;
+            font-weight: bold;
             margin-bottom: 15px;
         }
         
-        .features ul {
-            list-style: none;
-            padding: 0;
+        .support-description {
+            color: #cccccc;
+            line-height: 1.6;
+            margin-bottom: 15px;
         }
         
-        .features li {
-            margin: 10px 0;
-            padding-left: 30px;
-            position: relative;
+        .response-time {
+            background: rgba(40, 167, 69, 0.2);
+            color: #28a745;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 10px;
         }
         
-        .features li::before {
-            content: "✅";
-            position: absolute;
-            left: 0;
-        }
-        
-        .mining-section {
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+        .support-section {
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 15px;
             padding: 30px;
-            margin: 20px 0;
-            text-align: center;
+            margin-bottom: 30px;
+            border: 1px solid rgba(40, 167, 69, 0.3);
         }
         
-        .beta-section {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            border-radius: 15px;
-            padding: 30px;
-            margin: 20px 0;
-            text-align: center;
-            border: 2px solid #00ff88;
-            box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
-            animation: pulse-glow 2s infinite;
-        }
-        
-        @keyframes pulse-glow {
-            0%, 100% { box-shadow: 0 0 20px rgba(0, 255, 136, 0.3); }
-            50% { box-shadow: 0 0 30px rgba(0, 255, 136, 0.6); }
-        }
-        
-        .mining-section h2 {
-            color: white;
+        .section-title {
+            color: #28a745;
+            font-size: 1.8rem;
             margin-bottom: 20px;
-        }
-        
-        .mining-btn {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 15px 30px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.2em;
-            transition: all 0.3s ease;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-        }
-        
-        .mining-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: scale(1.05);
-        }
-        
-        .mining-btn:focus {
-            outline: 2px solid rgba(255, 255, 255, 0.8);
-            outline-offset: 2px;
-        }
-        
-        .beta-btn {
-            display: inline-block;
-            background: rgba(0, 255, 136, 0.2);
-            color: #00ff88;
-            padding: 15px 30px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.2em;
-            transition: all 0.3s ease;
-            border: 2px solid #00ff88;
-            margin: 10px;
-        }
-        
-        .beta-btn:hover {
-            background: rgba(0, 255, 136, 0.3);
-            transform: scale(1.05);
-            box-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
-        }
-        
-        .beta-btn:focus {
-            outline: 2px solid #00ff88;
-            outline-offset: 2px;
-        }
-        
-        .beta-signup {
-            margin: 20px 0;
-            padding: 20px;
-            background: rgba(0, 255, 136, 0.1);
-            border-radius: 10px;
-            border: 1px solid rgba(0, 255, 136, 0.3);
-        }
-        
-        .beta-warning {
-            background: rgba(0, 255, 136, 0.1);
-            border: 1px solid #00ff88;
-            color: #00ff88;
-            padding: 15px;
-            border-radius: 10px;
-            margin: 20px 0;
-            font-size: 0.9em;
-        }
-        
-        @media (max-width: 768px) {
-            .container {
-                padding: 20px;
-                margin: 10px;
-            }
-            
-            .header h1 {
-                font-size: 2.5em;
-            }
-            
-            .support-links {
-                grid-template-columns: 1fr;
-            }
-            
-            .mining-btn, .beta-btn {
-                padding: 12px 24px;
-                font-size: 1.1em;
-                display: block;
-                margin: 10px auto;
-                text-align: center;
-                max-width: 280px;
-            }
-            
-            .beta-section {
-                animation: none; /* Reduce motion on mobile */
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .header h1 {
-                font-size: 2em;
-            }
-            
-            .header p {
-                font-size: 1em;
-            }
-            
-            .support-section, .features, .mining-section {
-                padding: 20px;
-            }
-        }
-        
-        .footer {
             text-align: center;
-            margin-top: 40px;
-            opacity: 0.8;
         }
         
-        .loading-indicator {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 20px;
+        .faq-grid {
+            display: grid;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .faq-item {
+            background: rgba(255, 255, 255, 0.03);
             border-radius: 10px;
-            display: none;
+            padding: 25px;
+            border: 1px solid rgba(40, 167, 69, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
         
-        .error-message {
-            background: rgba(255, 107, 107, 0.2);
-            border: 1px solid #ff6b6b;
-            color: #ff6b6b;
+        .faq-item:hover {
+            border-color: #28a745;
+        }
+        
+        .faq-question {
+            color: #28a745;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-answer {
+            color: #cccccc;
+            font-size: 0.95rem;
+            display: none;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(40, 167, 69, 0.2);
+        }
+        
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+        
+        .documentation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .doc-item {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            padding: 25px;
+            border: 1px solid rgba(40, 167, 69, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .doc-item:hover {
+            transform: translateY(-3px);
+            border-color: #28a745;
+        }
+        
+        .doc-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .doc-title {
+            color: #28a745;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .doc-desc {
+            color: #cccccc;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .contact-form {
+            background: linear-gradient(135deg, #1a2810, #0a1a0a);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+            border: 2px solid #28a745;
+        }
+        
+        .form-input {
+            width: 100%;
+            max-width: 400px;
             padding: 15px;
             border-radius: 10px;
+            border: 2px solid #28a745;
+            background: rgba(0, 0, 0, 0.3);
+            color: #ffffff;
+            font-size: 1.1rem;
+            margin: 10px auto;
+            display: block;
+        }
+        
+        .form-input::placeholder {
+            color: #cccccc;
+        }
+        
+        .form-textarea {
+            width: 100%;
+            max-width: 600px;
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid #28a745;
+            background: rgba(0, 0, 0, 0.3);
+            color: #ffffff;
+            font-size: 1.1rem;
+            margin: 10px auto;
+            display: block;
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .form-textarea::placeholder {
+            color: #cccccc;
+        }
+        
+        .form-select {
+            width: 100%;
+            max-width: 400px;
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid #28a745;
+            background: rgba(0, 0, 0, 0.3);
+            color: #ffffff;
+            font-size: 1.1rem;
+            margin: 10px auto;
+            display: block;
+        }
+        
+        .form-select option {
+            background: #1a2810;
+            color: #ffffff;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin: 5px;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, #28a745, #5cb85c);
+            color: #fff;
+        }
+        
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.4);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid #28a745;
+            color: #28a745;
+        }
+        
+        .btn-secondary:hover {
+            background: #28a745;
+            color: #fff;
+        }
+        
+        .emergency-box {
+            background: rgba(220, 53, 69, 0.1);
+            border: 2px solid #dc3545;
+            border-radius: 10px;
+            padding: 20px;
             margin: 20px 0;
-            display: none;
+            text-align: center;
+        }
+        
+        .emergency-title {
+            color: #dc3545;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 40px 0;
+            padding: 20px 0;
+            border-top: 1px solid rgba(40, 167, 69, 0.3);
+        }
+        
+        .nav-links a {
+            color: #28a745;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 15px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            background: rgba(40, 167, 69, 0.1);
+            text-shadow: 0 0 10px rgba(40, 167, 69, 0.8);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            border-top: 2px solid #28a745;
+            margin-top: 40px;
+        }
+        
+        .footer-motto {
+            font-size: 1.2rem;
+            color: #5cb85c;
+            margin-bottom: 15px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .footer-links a {
+            color: #28a745;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .footer-links a:hover {
+            text-shadow: 0 0 10px rgba(40, 167, 69, 0.8);
         }
     </style>
 </head>
