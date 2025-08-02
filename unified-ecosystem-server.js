@@ -59,6 +59,9 @@ class UnifiedEcosystemServer {
             mainEcosystem: "https://tiltcheckecosystem.created.app",
             domain: "https://tiltcheck.it.com",
             discord: "https://discord.gg/betcollective",
+            sitemap: "https://tiltcheck.it.com/sitemap",
+            pitchDeck: "https://tiltcheck.it.com/pitch-deck",
+            teamMeeting: "https://calendly.com/jmenichole/cofounder-debrief",
             version: "5.0.0",
             year: new Date().getFullYear()
         };
@@ -112,6 +115,13 @@ class UnifiedEcosystemServer {
                     analytics: `${req.protocol}://${req.get('host')}/analytics`
                 },
                 developer: `${req.protocol}://${req.get('host')}/mischiefmanager`,
+                helpful_links: {
+                    back_to_home: `${req.protocol}://${req.get('host')}/`,
+                    ecosystem_overview: `${req.protocol}://${req.get('host')}/ecosystem`,
+                    sitemap: `${req.protocol}://${req.get('host')}/sitemap`,
+                    community_support: `${req.protocol}://${req.get('host')}/support`,
+                    developer_info: `${req.protocol}://${req.get('host')}/mischiefmanager`
+                },
                 footer: this.getEcosystemFooter()
             });
         });
@@ -129,6 +139,13 @@ class UnifiedEcosystemServer {
                 ],
                 dashboard: `${req.protocol}://${req.get('host')}/admindashboard`,
                 support: `${req.protocol}://${req.get('host')}/support`,
+                helpful_links: {
+                    back_to_home: `${req.protocol}://${req.get('host')}/`,
+                    ecosystem_overview: `${req.protocol}://${req.get('host')}/ecosystem`,
+                    sitemap: `${req.protocol}://${req.get('host')}/sitemap`,
+                    compliance_info: `${req.protocol}://${req.get('host')}/compliance`,
+                    community_support: `${req.protocol}://${req.get('host')}/support`
+                },
                 footer: this.getEcosystemFooter()
             });
         });
@@ -454,26 +471,132 @@ class UnifiedEcosystemServer {
 
         // ===== NAVIGATION & REDIRECTS =====
         
-        // Root route
+        // Root route - Main TiltCheck.it.com Landing Page
         this.app.get('/', (req, res) => {
             res.json({
-                title: "TiltCheck.it.com - Unified Ecosystem",
+                title: "TiltCheck.it.com - Responsible Gaming Ecosystem",
+                tagline: "Degenerate in Gaming, Responsible in Life",
                 status: "🟢 Live Production",
                 version: "5.0.0",
-                description: "Complete Discord bot ecosystem with crypto integration, risk monitoring, and community tools",
-                quickLinks: {
-                    ecosystem: `${req.protocol}://${req.get('host')}/ecosystem`,
-                    compliance: `${req.protocol}://${req.get('host')}/compliance`,
-                    portfolio: `${req.protocol}://${req.get('host')}/portfolio`,
-                    support: `${req.protocol}://${req.get('host')}/support`,
-                    inviteBot: `${req.protocol}://${req.get('host')}/bot`,
-                    discord: "https://discord.gg/betcollective"
+                mission: {
+                    statement: "Empowering the degen community with responsible gaming tools, transparent casino analysis, and community-driven trust systems while maintaining the chaotic fun that makes us who we are.",
+                    vision: "Building the most trusted and transparent gaming ecosystem where degens can play responsibly without losing their edge.",
+                    values: ["Transparency", "Community First", "Responsible Gaming", "Innovation", "Degen Spirit"]
                 },
-                liveApplications: {
-                    mainHub: "https://tiltcheckecosystem.created.app",
-                    degensBot: "https://tiltcheckecosystem.created.app/degens-bot",
-                    justTheTip: "https://tiltcheckecosystem.created.app/justthetip",
-                    collectClock: "https://jmenichole.github.io/CollectClock/"
+                navigation: {
+                    ecosystem_hub: `${req.protocol}://${req.get('host')}/ecosystem`,
+                    compliance_center: `${req.protocol}://${req.get('host')}/compliance`,
+                    developer_portfolio: `${req.protocol}://${req.get('host')}/portfolio`,
+                    community_support: `${req.protocol}://${req.get('host')}/support`,
+                    pitch_deck: `${req.protocol}://${req.get('host')}/pitch-deck`
+                },
+                core_applications: {
+                    tiltcheck_monitor: {
+                        url: `${req.protocol}://${req.get('host')}/tiltcheck`,
+                        description: "Real-time gambling behavior analysis and risk assessment",
+                        status: "🟢 Active"
+                    },
+                    casino_transparency: {
+                        url: `${req.protocol}://${req.get('host')}/casinos`,
+                        description: "Community-verified casino ratings and transparency reports",
+                        status: "🎰 Monitoring"
+                    },
+                    trust_scoring: {
+                        url: `${req.protocol}://${req.get('host')}/degentrustscore`,
+                        description: "Blockchain-verified reputation scoring system",
+                        status: "📊 Live"
+                    },
+                    suspicious_link_detection: {
+                        url: `${req.protocol}://${req.get('host')}/suslink`,
+                        description: "Community-powered link verification and safety",
+                        status: "🔍 Scanning"
+                    }
+                },
+                gaming_ecosystem: {
+                    degens_card_game: {
+                        url: `${req.protocol}://${req.get('host')}/degensagainstdecency`,
+                        description: "Strategic card game with NFT integration",
+                        status: "🔥 Beta Active"
+                    },
+                    nft_collection: {
+                        url: `${req.protocol}://${req.get('host')}/nft`,
+                        description: "Playable NFT cards and community badges",
+                        status: "🎨 Collection Active"
+                    },
+                    beta_program: {
+                        url: `${req.protocol}://${req.get('host')}/beta`,
+                        description: "Early access to experimental features",
+                        status: "🧪 Testing"
+                    }
+                },
+                discord_ecosystem: {
+                    traphouse_bot: {
+                        url: `${req.protocol}://${req.get('host')}/discordbots`,
+                        description: "Complete Discord bot collection with lending and tipping",
+                        invite: `${req.protocol}://${req.get('host')}/bot`
+                    },
+                    aim_overlay: {
+                        url: `${req.protocol}://${req.get('host')}/aimoverlay`,
+                        description: "Advanced Interface Management for Discord bots",
+                        status: "🎯 Active"
+                    },
+                    community_hub: {
+                        url: "https://discord.gg/betcollective",
+                        description: "Join the BetCollective Discord community",
+                        type: "external"
+                    }
+                },
+                live_integrations: {
+                    main_ecosystem_hub: "https://tiltcheckecosystem.created.app",
+                    degens_bot_access: "https://tiltcheckecosystem.created.app/degens-bot",
+                    justthetip_tipping: "https://tiltcheckecosystem.created.app/justthetip",
+                    collectclock_rewards: "https://jmenichole.github.io/CollectClock/"
+                },
+                team_access: {
+                    cofounder_debrief: {
+                        calendar_link: "https://calendly.com/jmenichole/cofounder-debrief",
+                        description: "Schedule strategic planning session with founding team"
+                    },
+                    dev_team_invite: {
+                        discord_channel: "https://discord.gg/betcollective",
+                        github_access: "https://github.com/jmenichole/trap-house-discord-bot",
+                        description: "Join the development team Discord and GitHub access"
+                    },
+                    marketing_operations: {
+                        document_hub: `${req.protocol}://${req.get('host')}/marketing-docs`,
+                        description: "Marketing strategy and operations documentation",
+                        team_invite: "https://discord.gg/betcollective"
+                    },
+                    pitch_materials: {
+                        deck: `${req.protocol}://${req.get('host')}/pitch-deck`,
+                        one_pager: `${req.protocol}://${req.get('host')}/one-pager`,
+                        whitepaper: `${req.protocol}://${req.get('host')}/whitepaper`
+                    }
+                },
+                helpful_links: {
+                    back_to_home: `${req.protocol}://${req.get('host')}/`,
+                    ecosystem_overview: `${req.protocol}://${req.get('host')}/ecosystem`,
+                    sitemap: `${req.protocol}://${req.get('host')}/sitemap`,
+                    api_documentation: `${req.protocol}://${req.get('host')}/api/navigation`,
+                    health_status: `${req.protocol}://${req.get('host')}/api/health`,
+                    developer_info: `${req.protocol}://${req.get('host')}/mischiefmanager`,
+                    compliance_info: `${req.protocol}://${req.get('host')}/compliance`,
+                    regulatory_guidance: `${req.protocol}://${req.get('host')}/gamblingregulations`,
+                    community_support: `${req.protocol}://${req.get('host')}/support`
+                },
+                quick_actions: {
+                    invite_discord_bot: `${req.protocol}://${req.get('host')}/bot`,
+                    join_community: `${req.protocol}://${req.get('host')}/discord`,
+                    view_source_code: `${req.protocol}://${req.get('host')}/github`,
+                    support_development: `${req.protocol}://${req.get('host')}/kofi`,
+                    schedule_meeting: "https://calendly.com/jmenichole/cofounder-debrief"
+                },
+                branding: {
+                    primary_color: "#00ff88",
+                    secondary_color: "#ff6b35", 
+                    motto: "Made 4 Degens by Degens ❤️",
+                    community_values: ["Transparency", "Responsibility", "Innovation", "Community"],
+                    brand_voice: "Professional chaos with a responsible edge"
                 },
                 footer: this.getEcosystemFooter()
             });
@@ -497,6 +620,257 @@ class UnifiedEcosystemServer {
         // Discord community redirect
         this.app.get('/discord', (req, res) => {
             res.redirect(301, 'https://discord.gg/betcollective');
+        });
+
+        // ===== NEW BUSINESS & TEAM ROUTES =====
+        
+        // Pitch deck and business materials
+        this.app.get('/pitch-deck', (req, res) => {
+            res.json({
+                title: "TiltCheck.it.com - Pitch Deck & Business Overview",
+                tagline: "Revolutionizing Responsible Gaming Through Community Trust",
+                executive_summary: {
+                    problem: "Gaming industry lacks transparent, community-driven responsibility tools",
+                    solution: "Comprehensive ecosystem combining responsible gaming monitoring, casino transparency, and community trust scoring",
+                    market_size: "Global online gambling market: $66.7B (2020) → $92.9B (2023)",
+                    unique_value: "First platform combining degen culture with responsible gaming tools"
+                },
+                business_model: {
+                    revenue_streams: [
+                        "Casino partnership fees for transparency ratings",
+                        "Premium API access for gambling operators", 
+                        "NFT marketplace transaction fees",
+                        "Discord bot premium features",
+                        "Community-sponsored tournaments"
+                    ],
+                    target_market: "18-35 crypto-native gaming enthusiasts",
+                    competitive_advantage: "Community-first approach with blockchain verification"
+                },
+                traction: {
+                    discord_servers: 156,
+                    active_users: 2847,
+                    processed_loans: 1580,
+                    crypto_tips_sent: 4672,
+                    casino_reviews: 100,
+                    trust_scores_generated: 500
+                },
+                roadmap: {
+                    q1_2025: "Enhanced TiltCheck AI, Casino API integration",
+                    q2_2025: "NFT marketplace launch, Mobile app MVP",
+                    q3_2025: "Regulatory compliance certification, B2B partnerships",
+                    q4_2025: "International expansion, Institutional partnerships"
+                },
+                funding_ask: {
+                    seed_round: "$500K",
+                    use_of_funds: [
+                        "40% - Product development & AI enhancement",
+                        "30% - Marketing & community growth", 
+                        "20% - Regulatory compliance & legal",
+                        "10% - Operations & team expansion"
+                    ]
+                },
+                team_contact: {
+                    schedule_meeting: "https://calendly.com/jmenichole/cofounder-debrief",
+                    pitch_materials: `${req.protocol}://${req.get('host')}/one-pager`,
+                    technical_overview: `${req.protocol}://${req.get('host')}/whitepaper`
+                },
+                helpful_links: {
+                    back_to_home: `${req.protocol}://${req.get('host')}/`,
+                    live_demo: `${req.protocol}://${req.get('host')}/ecosystem`,
+                    developer_info: `${req.protocol}://${req.get('host')}/mischiefmanager`
+                },
+                footer: this.getEcosystemFooter()
+            });
+        });
+
+        // One-pager executive summary
+        this.app.get('/one-pager', (req, res) => {
+            res.json({
+                title: "TiltCheck.it.com - Executive Summary",
+                company: "TiltCheck Ecosystem",
+                tagline: "Degenerate in Gaming, Responsible in Life",
+                problem: "The $90B+ gambling industry lacks transparent, community-driven responsibility tools that actually understand degen culture.",
+                solution: "A comprehensive ecosystem combining real-time gambling behavior monitoring, casino transparency ratings, and blockchain-verified community trust scoring.",
+                key_metrics: {
+                    users: "2,847 active users across 156 Discord servers",
+                    transactions: "1,580 loans processed, 4,672 crypto tips sent",
+                    growth: "300% user growth in 6 months"
+                },
+                competitive_advantage: [
+                    "First platform built BY degens FOR degens",
+                    "Community-first approach with blockchain verification",
+                    "Real-time risk monitoring without judgment",
+                    "Transparent casino rating system"
+                ],
+                business_model: "SaaS + Marketplace + Premium Features",
+                funding_status: "Seeking $500K seed round",
+                contact: {
+                    founder: "jmenichole - Mischief Manager",
+                    email: "Via Discord: https://discord.gg/betcollective",
+                    calendar: "https://calendly.com/jmenichole/cofounder-debrief"
+                },
+                helpful_links: {
+                    back_to_home: `${req.protocol}://${req.get('host')}/`,
+                    full_pitch: `${req.protocol}://${req.get('host')}/pitch-deck`,
+                    technical_details: `${req.protocol}://${req.get('host')}/whitepaper`
+                },
+                footer: this.getEcosystemFooter()
+            });
+        });
+
+        // Technical whitepaper
+        this.app.get('/whitepaper', (req, res) => {
+            res.json({
+                title: "TiltCheck.it.com - Technical Whitepaper",
+                subtitle: "Blockchain-Verified Responsible Gaming Ecosystem",
+                abstract: "TiltCheck represents a paradigm shift in responsible gaming technology, leveraging blockchain verification, community governance, and AI-powered risk assessment to create the first truly transparent gaming responsibility platform.",
+                technical_architecture: {
+                    backend: "Node.js with Express.js microservices",
+                    blockchain: "Multi-chain support (Ethereum, Solana, Polygon)",
+                    ai_engine: "Custom risk assessment algorithms",
+                    database: "MongoDB with Redis caching",
+                    apis: "RESTful APIs with GraphQL for complex queries"
+                },
+                key_innovations: [
+                    "Real-time gambling behavior pattern recognition",
+                    "Community-verified casino transparency scoring",
+                    "Blockchain-backed trust reputation system",
+                    "Zero-knowledge privacy for sensitive data",
+                    "Cross-platform Discord bot integration"
+                ],
+                security_measures: {
+                    data_protection: "End-to-end encryption for all user data",
+                    blockchain_verification: "Immutable trust score records",
+                    privacy_compliance: "GDPR and CCPA compliant",
+                    audit_trail: "Complete transaction transparency"
+                },
+                research_backing: {
+                    responsible_gaming: "Based on established harm reduction principles",
+                    behavioral_analysis: "Peer-reviewed addiction research integration",
+                    community_trust: "Social proof and reputation theory"
+                },
+                developer_resources: {
+                    api_docs: `${req.protocol}://${req.get('host')}/api/navigation`,
+                    github: "https://github.com/jmenichole/trap-house-discord-bot",
+                    technical_contact: "https://discord.gg/betcollective"
+                },
+                helpful_links: {
+                    back_to_home: `${req.protocol}://${req.get('host')}/`,
+                    business_overview: `${req.protocol}://${req.get('host')}/pitch-deck`,
+                    quick_summary: `${req.protocol}://${req.get('host')}/one-pager`
+                },
+                footer: this.getEcosystemFooter()
+            });
+        });
+
+        // Marketing and operations documentation
+        this.app.get('/marketing-docs', (req, res) => {
+            res.json({
+                title: "TiltCheck.it.com - Marketing & Operations Hub",
+                brand_strategy: {
+                    positioning: "The responsible gaming platform that gets degen culture",
+                    target_audience: "18-35 crypto-native gaming enthusiasts",
+                    brand_voice: "Professional chaos with a responsible edge",
+                    key_messaging: "Degenerate in gaming, responsible in life"
+                },
+                marketing_channels: {
+                    discord_communities: "Primary channel for user acquisition",
+                    crypto_twitter: "Thought leadership and community building",
+                    twitch_partnerships: "Streamer collaborations and sponsorships",
+                    reddit_engagement: "r/gambling, r/cryptocurrency, r/discordbots"
+                },
+                content_strategy: {
+                    educational_content: "Responsible gaming tips and casino analysis",
+                    community_stories: "User success stories and testimonials",
+                    technical_updates: "Development progress and feature releases",
+                    transparency_reports: "Casino ratings and analysis publication"
+                },
+                operations_framework: {
+                    customer_support: `${req.protocol}://${req.get('host')}/support`,
+                    community_management: "https://discord.gg/betcollective",
+                    partnership_development: "https://calendly.com/jmenichole/cofounder-debrief",
+                    compliance_monitoring: `${req.protocol}://${req.get('host')}/compliance`
+                },
+                team_onboarding: {
+                    marketing_team_discord: "https://discord.gg/betcollective",
+                    brand_guidelines: "Available in team Discord",
+                    content_calendar: "Shared team workspace",
+                    analytics_access: "Request via Discord"
+                },
+                helpful_links: {
+                    back_to_home: `${req.protocol}://${req.get('host')}/`,
+                    join_team: "https://discord.gg/betcollective",
+                    schedule_meeting: "https://calendly.com/jmenichole/cofounder-debrief"
+                },
+                footer: this.getEcosystemFooter()
+            });
+        });
+
+        // Comprehensive sitemap
+        this.app.get('/sitemap', (req, res) => {
+            res.json({
+                title: "TiltCheck.it.com - Complete Sitemap",
+                primary_pages: {
+                    home: `${req.protocol}://${req.get('host')}/`,
+                    ecosystem_hub: `${req.protocol}://${req.get('host')}/ecosystem`,
+                    compliance_center: `${req.protocol}://${req.get('host')}/compliance`,
+                    developer_portfolio: `${req.protocol}://${req.get('host')}/portfolio`,
+                    community_support: `${req.protocol}://${req.get('host')}/support`
+                },
+                core_applications: {
+                    tiltcheck_monitor: `${req.protocol}://${req.get('host')}/tiltcheck`,
+                    casino_transparency: `${req.protocol}://${req.get('host')}/casinos`,
+                    trust_scoring: `${req.protocol}://${req.get('host')}/degentrustscore`,
+                    suspicious_links: `${req.protocol}://${req.get('host')}/suslink`,
+                    regulatory_guide: `${req.protocol}://${req.get('host')}/gamblingregulations`
+                },
+                gaming_ecosystem: {
+                    degens_card_game: `${req.protocol}://${req.get('host')}/degensagainstdecency`,
+                    nft_collection: `${req.protocol}://${req.get('host')}/nft`,
+                    beta_program: `${req.protocol}://${req.get('host')}/beta`
+                },
+                discord_integration: {
+                    bot_collection: `${req.protocol}://${req.get('host')}/discordbots`,
+                    aim_overlay: `${req.protocol}://${req.get('host')}/aimoverlay`,
+                    traphouse_ecosystem: `${req.protocol}://${req.get('host')}/traphouse`,
+                    bot_invite: `${req.protocol}://${req.get('host')}/bot`
+                },
+                team_and_business: {
+                    mischief_manager: `${req.protocol}://${req.get('host')}/mischiefmanager`,
+                    pitch_deck: `${req.protocol}://${req.get('host')}/pitch-deck`,
+                    executive_summary: `${req.protocol}://${req.get('host')}/one-pager`,
+                    technical_whitepaper: `${req.protocol}://${req.get('host')}/whitepaper`,
+                    marketing_docs: `${req.protocol}://${req.get('host')}/marketing-docs`
+                },
+                api_endpoints: {
+                    health_check: `${req.protocol}://${req.get('host')}/api/health`,
+                    navigation: `${req.protocol}://${req.get('host')}/api/navigation`,
+                    crypto_prices: `${req.protocol}://${req.get('host')}/api/crypto/prices`,
+                    ecosystem_stats: `${req.protocol}://${req.get('host')}/api/stats`,
+                    swc_verification: `${req.protocol}://${req.get('host')}/api/swc/verification`
+                },
+                external_integrations: {
+                    main_ecosystem: "https://tiltcheckecosystem.created.app",
+                    degens_bot: "https://tiltcheckecosystem.created.app/degens-bot",
+                    justthetip: "https://tiltcheckecosystem.created.app/justthetip",
+                    collectclock: "https://jmenichole.github.io/CollectClock/",
+                    discord_community: "https://discord.gg/betcollective",
+                    github_repo: "https://github.com/jmenichole/trap-house-discord-bot",
+                    kofi_support: "https://ko-fi.com/jmenichole0"
+                },
+                quick_redirects: {
+                    github: `${req.protocol}://${req.get('host')}/github`,
+                    discord: `${req.protocol}://${req.get('host')}/discord`,
+                    kofi: `${req.protocol}://${req.get('host')}/kofi`,
+                    linkedin: `${req.protocol}://${req.get('host')}/linkedin`
+                },
+                helpful_links: {
+                    back_to_home: `${req.protocol}://${req.get('host')}/`,
+                    ecosystem_overview: `${req.protocol}://${req.get('host')}/ecosystem`,
+                    api_documentation: `${req.protocol}://${req.get('host')}/api/navigation`
+                },
+                footer: this.getEcosystemFooter()
+            });
         });
     }
 
