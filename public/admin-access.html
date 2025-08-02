@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Access - NFT Verification Required | TiltCheck Dashboard</title>
+    <meta name="description" content="Secure admin access to TiltCheck ecosystem dashboard requires Stand With Crypto NFT verification.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #000000 0%, #008080 50%, #800080 100%);
+            color: #ffffff;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            max-width: 600px;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #008080;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            color: #008080;
+            margin-bottom: 10px;
+        }
+        
+        .title {
+            font-size: 1.8rem;
+            color: #800080;
+            margin-bottom: 30px;
+        }
+        
+        .nft-requirement {
+            background: rgba(128, 0, 128, 0.1);
+            border: 1px solid #800080;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        
+        .nft-details {
+            background: rgba(0, 128, 128, 0.1);
+            border: 1px solid #008080;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        
+        .verification-form {
+            margin: 30px 0;
+        }
+        
+        .form-group {
+            margin: 20px 0;
+            text-align: left;
+        }
+        
+        label {
+            display: block;
+            color: #008080;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        input {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid #008080;
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 1rem;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #800080;
+            box-shadow: 0 0 10px rgba(128, 0, 128, 0.3);
+        }
+        
+        .verify-button {
+            background: linear-gradient(135deg, #008080, #800080);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 20px 0;
+        }
+        
+        .verify-button:hover {
+            background: linear-gradient(135deg, #800080, #008080);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(128, 0, 128, 0.3);
+        }
+        
+        .status-message {
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+        
+        .success {
+            background: rgba(0, 255, 0, 0.1);
+            border: 1px solid #00ff00;
+            color: #00ff00;
+        }
+        
+        .error {
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid #ff0000;
+            color: #ff0000;
+        }
+        
+        .warning {
+            background: rgba(255, 255, 0, 0.1);
+            border: 1px solid #ffff00;
+            color: #ffff00;
+        }
+        
+        .footer-links {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #008080;
+        }
+        
+        .footer-links a {
+            color: #008080;
+            text-decoration: none;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #800080;
+        }
+        
+        .loading {
+            display: none;
+            color: #008080;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">🛡️</div>
+        <h1 class="title">Admin Dashboard Access</h1>
+        <div style="color: #cccccc; margin-bottom: 30px;">
+            TiltCheck Ecosystem Administrative Panel
+        </div>
+        
+        <div class="nft-requirement">
+            <h2 style="color: #800080; margin-bottom: 15px;">🎫 NFT Verification Required</h2>
+            <p>Access to the admin dashboard requires verification of the Stand With Crypto Coalition NFT. This ensures secure access to sensitive ecosystem controls and analytics.</p>
+        </div>
+        
+        <div class="nft-details">
+            <h3 style="color: #008080; margin-bottom: 10px;">Required NFT Details</h3>
+            <div style="font-family: monospace; font-size: 0.9rem;">
+                <strong>Collection:</strong> Stand With Crypto Coalition<br>
+                <strong>Expected Wallet:</strong> 0xdD5bD7849E0AbA97f1BE680E0EC1b7db59Fc74AA<br>
+                <strong>Token ID:</strong> 1400992867425452092<br>
+                <strong>Discord ID:</strong> 1174481962614931507
+            </div>
+        </div>
+        
+        <form class="verification-form" id="nftVerificationForm">
+            <div class="form-group">
+                <label for="walletAddress">Wallet Address</label>
+                <input 
+                    type="text" 
+                    id="walletAddress" 
+                    name="walletAddress" 
+                    placeholder="0xdD5bD7849E0AbA97f1BE680E0EC1b7db59Fc74AA"
+                    required
+                >
+            </div>
+            
+            <div class="form-group">
+                <label for="tokenId">NFT Token ID</label>
+                <input 
+                    type="number" 
+                    id="tokenId" 
+                    name="tokenId" 
+                    placeholder="1400992867425452092"
+                    required
+                >
+            </div>
+            
+            <div class="form-group">
+                <label for="signature">Signature (Optional - Demo Mode)</label>
+                <input 
+                    type="text" 
+                    id="signature" 
+                    name="signature" 
+                    placeholder="Wallet signature for verification"
+                >
+            </div>
+            
+            <button type="submit" class="verify-button">
+                🔐 Verify NFT & Access Dashboard
+            </button>
+            
+            <div class="loading" id="loadingMessage">
+                Verifying NFT ownership...
+            </div>
+        </form>
+        
+        <div id="statusMessage" class="status-message" style="display: none;"></div>
+        
+        <div style="margin: 30px 0; padding: 20px; background: rgba(0, 128, 128, 0.1); border-radius: 10px;">
+            <h3 style="color: #008080; margin-bottom: 10px;">🎮 Dashboard Features</h3>
+            <ul style="text-align: left; color: #cccccc;">
+                <li>🎯 TiltCheck Analytics & Risk Monitoring</li>
+                <li>🎮 Beta Testing Feedback Management</li>
+                <li>📊 Ecosystem Performance Metrics</li>
+                <li>🤖 Discord Bot Configuration</li>
+                <li>💎 NFT Trust System Oversight</li>
+                <li>🎴 Degens Card Game Administration</li>
+                <li>🛠️ System Health Monitoring</li>
+            </ul>
+        </div>
+        
+        <div style="margin: 20px 0; color: #800080; font-style: italic;">
+            <strong>jmenichole - Mischief Manager</strong><br>
+            "Managing Mischief One Impulse at a Time"
+        </div>
+        
+        <div class="footer-links">
+            <a href="/">🏠 Home</a>
+            <a href="/ecosystem">🎮 Ecosystem</a>
+            <a href="/mischief-manager">🧠 Original Concept</a>
+            <a href="/support">🛟 Support</a>
+            <a href="https://discord.gg/K3Md6aZx">💬 Discord</a>
+        </div>
+        
+        <div style="margin-top: 20px; font-size: 0.9rem; color: #666;">
+            Made for Degens by Degens Who Learned the Hard Way ❤️
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('nftVerificationForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const loadingMessage = document.getElementById('loadingMessage');
+            const statusMessage = document.getElementById('statusMessage');
+            const submitButton = document.querySelector('.verify-button');
+            
+            // Show loading state
+            loadingMessage.style.display = 'block';
+            submitButton.disabled = true;
+            statusMessage.style.display = 'none';
+            
+            const formData = {
+                walletAddress: document.getElementById('walletAddress').value,
+                tokenId: parseInt(document.getElementById('tokenId').value),
+                signature: document.getElementById('signature').value || 'demo_signature'
+            };
+            
+            try {
+                const response = await fetch('/api/admin/verify-nft', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    statusMessage.className = 'status-message success';
+                    statusMessage.textContent = '✅ NFT Verified! Redirecting to admin dashboard...';
+                    statusMessage.style.display = 'block';
+                    
+                    // Store session token and redirect
+                    localStorage.setItem('adminToken', result.sessionToken);
+                    setTimeout(() => {
+                        window.location.href = `http://localhost:3001/admin/dashboard?token=${result.sessionToken}`;
+                    }, 2000);
+                } else {
+                    statusMessage.className = 'status-message error';
+                    statusMessage.textContent = '❌ ' + result.error;
+                    statusMessage.style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Verification error:', error);
+                statusMessage.className = 'status-message error';
+                statusMessage.textContent = '❌ Connection error. Please try again.';
+                statusMessage.style.display = 'block';
+            } finally {
+                loadingMessage.style.display = 'none';
+                submitButton.disabled = false;
+            }
+        });
+        
+        // Auto-fill demo values for testing
+        document.addEventListener('DOMContentLoaded', () => {
+            const isDemoMode = window.location.search.includes('demo=true');
+            if (isDemoMode) {
+                document.getElementById('walletAddress').value = '0xdD5bD7849E0AbA97f1BE680E0EC1b7db59Fc74AA';
+                document.getElementById('tokenId').value = '1400992867425452092';
+                
+                const warningDiv = document.createElement('div');
+                warningDiv.className = 'status-message warning';
+                warningDiv.textContent = '⚠️ Demo mode active - using test values';
+                warningDiv.style.display = 'block';
+                document.querySelector('.verification-form').prepend(warningDiv);
+            }
+        });
+        
+        console.log('🛡️ Admin verification page loaded');
+        console.log('NFT requirement: Stand With Crypto Coalition');
+    </script>
+</body>
+</html>

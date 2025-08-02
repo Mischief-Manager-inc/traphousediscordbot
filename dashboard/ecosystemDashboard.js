@@ -10,8 +10,16 @@ class EcosystemDashboard {
     constructor() {
         this.app = express();
         this.port = 3001;
-        this.adminNFTAddress = "0x742d35Cc6634C0532925a3b8D4C6212d5f2b5FcD"; // jmenichole's admin NFT
-        this.adminTokenId = 1337; // Specific admin token
+        // jmenichole's admin NFT details - Stand With Crypto Coalition
+        this.adminNFTAddress = "0xdD5bD7849E0AbA97f1BE680E0EC1b7db59Fc74AA"; // Your SWC wallet
+        this.adminTokenId = 1400992867425452092; // Your SWC NFT ID
+        this.adminDiscordId = "1174481962614931507"; // Your Discord ID
+        this.mischiefManagerTheme = {
+            primaryColor: "#000000", // Black
+            secondaryColor: "#008080", // Teal  
+            accentColor: "#800080", // Purple
+            motto: "Managing Mischief One Impulse at a Time"
+        };
         this.strategyCoach = new TiltCheckStrategyCoach();
         
         this.setupMiddleware();
@@ -103,28 +111,63 @@ class EcosystemDashboard {
     // Public Dashboard Routes
     getDashboardHome(req, res) {
         res.json({
-            title: "TiltCheck Ecosystem Dashboard",
-            version: "2.0.0",
-            status: "operational",
+            title: "🎮 TiltCheck Ecosystem Dashboard - Mischief Manager Control Center",
+            subtitle: "Managing Mischief One Impulse at a Time",
+            creator: {
+                name: "jmenichole - Mischief Manager",
+                originalConcept: "AI-powered mental health app to help users avoid targeted advertising and manage impulsive spending",
+                pivotStory: "Started coding journey to build mental health app → discovered online gambling → pivoted to responsible gaming ecosystem",
+                currentFocus: "Complete Discord bot ecosystem for degens who want accountability without judgment",
+                education: "Went to school to learn coding specifically to build this vision",
+                motto: "Made for Degens by Degens Who Learned the Hard Way"
+            },
+            mischiefManagerBranding: {
+                originalTheme: {
+                    primary: "#000000", // Black
+                    secondary: "#008080", // Teal
+                    accent: "#800080" // Purple
+                },
+                concept: "AI assistant for mindful mischief management",
+                targetProblems: [
+                    "Targeted advertising exploitation",
+                    "Impulsive spending behaviors", 
+                    "Credit self-sabotage patterns",
+                    "Mental health awareness gaps"
+                ],
+                evolution: "Mental health → Gambling awareness → Complete ecosystem"
+            },
+            ecosystem: "TiltCheck Responsible Gaming Platform",
+            version: "5.0.0",
+            status: "🟢 Fully Operational",
             features: [
-                "🎯 Strategy Coach",
-                "🎰 Casino Transparency",
-                "🛡️ NFT Verification",
+                "� TiltCheck Risk Monitoring",
+                "🕐 CollectClock Time-based Rewards",
+                "💰 JustTheTip Crypto Recommendations",
+                "🎮 Degens Against Decency Card Game",
+                "🤖 Discord Bot Ecosystem", 
+                "🛡️ NFT-Protected Admin Access",
                 "📊 Real-time Analytics",
-                "🔧 Admin Controls (NFT Protected)"
+                "🧠 AI Strategy Coach"
             ],
+            adminAccess: {
+                requirement: "Stand With Crypto NFT Verification",
+                nftContract: "SWC Coalition Member",
+                verificationEndpoint: "/api/admin/verify-nft"
+            },
             endpoints: {
                 public: [
                     "/ecosystem-status",
-                    "/strategy-coach",
+                    "/strategy-coach", 
                     "/api/coaching/session",
-                    "/api/casino-transparency"
+                    "/api/casino-transparency",
+                    "/health"
                 ],
-                admin: [
+                adminProtected: [
                     "/admin/dashboard",
                     "/admin/beta-feedback",
-                    "/admin/analytics",
-                    "/admin/task-manager"
+                    "/admin/analytics", 
+                    "/admin/task-manager",
+                    "/admin/suggestions"
                 ]
             },
             ecosystemNavigation: {
@@ -133,6 +176,8 @@ class EcosystemDashboard {
                 justTheTip: "https://tiltcheckecosystem.created.app/justthetip",
                 tiltcheckMain: "https://tiltcheck.it.com",
                 discord: "https://discord.gg/K3Md6aZx",
+                portfolio: "https://jmenichole.github.io/Portfolio/",
+                collectClock: "https://jmenichole.github.io/CollectClock/",
                 support: "https://discord.gg/K3Md6aZx"
             }
         });
@@ -317,9 +362,16 @@ class EcosystemDashboard {
     }
 
     verifyNFTOwnership(walletAddress, tokenId) {
-        // Simplified NFT verification - in production this would check blockchain
-        return walletAddress.toLowerCase() === this.adminNFTAddress.toLowerCase() && 
-               tokenId === this.adminTokenId;
+        // Verify Stand With Crypto NFT ownership for jmenichole
+        const isCorrectWallet = walletAddress.toLowerCase() === this.adminNFTAddress.toLowerCase();
+        const isCorrectToken = tokenId === this.adminTokenId;
+        
+        console.log(`🛡️ NFT Verification Check:
+        Wallet: ${walletAddress} (Expected: ${this.adminNFTAddress})
+        Token ID: ${tokenId} (Expected: ${this.adminTokenId})
+        Match: ${isCorrectWallet && isCorrectToken}`);
+        
+        return isCorrectWallet && isCorrectToken;
     }
 
     // Admin Authentication Middleware

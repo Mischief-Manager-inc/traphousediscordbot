@@ -49,8 +49,10 @@ class UnifiedEcosystemServer {
 
     getEcosystemFooter() {
         return {
-            madeBy: "Made 4 Degens by Degens ❤️",
+            madeBy: "Made for Degens by Degens Who Learned the Hard Way ❤️",
             developer: "jmenichole - Mischief Manager",
+            originalConcept: "AI app for mental health & impulse control → evolved into responsible gaming ecosystem",
+            mischiefManagerMotto: "Managing Mischief One Impulse at a Time",
             github: "https://github.com/jmenichole/trap-house-discord-bot",
             kofi: "https://ko-fi.com/jmenichole0",
             portfolio: "https://jmenichole.github.io/Portfolio/",
@@ -60,6 +62,7 @@ class UnifiedEcosystemServer {
             domain: "https://tiltcheck.it.com",
             discord: "https://discord.gg/betcollective",
             sitemap: "https://tiltcheck.it.com/sitemap",
+            mischiefManagerStory: "https://tiltcheck.it.com/mischief-manager",
             pitchDeck: "https://tiltcheck.it.com/pitch-deck",
             teamMeeting: "https://calendly.com/jmenichole/cofounder-debrief",
             version: "5.0.0",
@@ -83,7 +86,82 @@ class UnifiedEcosystemServer {
             res.sendFile(path.join(__dirname, 'public', 'support.html'));
         });
 
-        // ===== ADDITIONAL LANDING PAGES =====
+        // ===== ADDITIONAL HTML PAGES =====
+        
+        // Core ecosystem HTML pages
+        this.app.get('/', (req, res) => {
+            res.sendFile(path.join(__dirname, 'public', 'index.html'));
+        });
+        
+        this.app.get('/index', (req, res) => {
+            res.sendFile(path.join(__dirname, 'public', 'index.html'));
+        });
+        
+        this.app.get('/ecosystem', (req, res) => {
+            res.sendFile(path.join(__dirname, 'public', 'ecosystem.html'));
+        });
+        
+        this.app.get('/beta', (req, res) => {
+            res.sendFile(path.join(__dirname, 'public', 'beta.html'));
+        });
+        
+        this.app.get('/tiltcheck', (req, res) => {
+            res.sendFile(path.join(__dirname, 'public', 'tiltcheck.html'));
+        });
+        
+        this.app.get('/nft', (req, res) => {
+            res.sendFile(path.join(__dirname, 'public', 'nft.html'));
+        });
+        
+        this.app.get('/degensagainstdecency', (req, res) => {
+            res.sendFile(path.join(__dirname, 'public', 'degensagainstdecency.html'));
+        });
+        
+        this.app.get('/degentrustscore', (req, res) => {
+            res.sendFile(path.join(__dirname, 'public', 'degentrustscore.html'));
+        });
+        
+        this.app.get('/discordbots', (req, res) => {
+            res.sendFile(path.join(__dirname, 'public', 'discordbots.html'));
+        });
+        
+        this.app.get('/suslink', (req, res) => {
+            res.sendFile(path.join(__dirname, 'public', 'suslink.html'));
+        });
+        
+        this.app.get('/casinos', (req, res) => {
+            res.sendFile(path.join(__dirname, 'public', 'casinos.html'));
+        });
+        
+        this.app.get('/gamblingregulations', (req, res) => {
+            res.sendFile(path.join(__dirname, 'public', 'gamblingregulations.html'));
+        });
+        
+        this.app.get('/sitemap', (req, res) => {
+            res.sendFile(path.join(__dirname, 'public', 'sitemap.html'));
+        });
+        
+        this.app.get('/test-dashboard', (req, res) => {
+            res.sendFile(path.join(__dirname, 'public', 'test-dashboard.html'));
+        });
+        
+        this.app.get('/mischief-manager', (req, res) => {
+            res.sendFile(path.join(__dirname, 'public', 'mischief-manager.html'));
+        });
+        
+        this.app.get('/mischiefmanager', (req, res) => {
+            res.sendFile(path.join(__dirname, 'public', 'mischief-manager.html'));
+        });
+        
+        this.app.get('/admin-access', (req, res) => {
+            res.sendFile(path.join(__dirname, 'public', 'admin-access.html'));
+        });
+        
+        this.app.get('/admin', (req, res) => {
+            res.sendFile(path.join(__dirname, 'public', 'admin-access.html'));
+        });
+
+        // ===== REDIRECTS & EXTERNAL INTEGRATIONS =====
         
         this.app.get('/justthetip', (req, res) => {
             res.redirect(301, 'https://tiltcheckecosystem.created.app/justthetip');
