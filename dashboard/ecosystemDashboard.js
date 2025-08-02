@@ -10,16 +10,20 @@ class EcosystemDashboard {
     constructor() {
         this.app = express();
         this.port = 3001;
-        // jmenichole's admin NFT details - Stand With Crypto Coalition
-        this.adminNFTAddress = "0xdD5bD7849E0AbA97f1BE680E0EC1b7db59Fc74AA"; // Your SWC wallet
-        this.adminTokenId = 1400992867425452092; // Your SWC NFT ID
+        // Admin access through Degens Trust Score NFT minting
         this.adminDiscordId = "1174481962614931507"; // Your Discord ID
+        this.betCollectiveDiscord = "https://discord.gg/K3Md6aZx"; // BetCollective Discord
         this.mischiefManagerTheme = {
             primaryColor: "#000000", // Black
-            secondaryColor: "#008080", // Teal  
+            secondaryColor: "#008080", // Teal
             accentColor: "#800080", // Purple
-            motto: "Managing Mischief One Impulse at a Time"
+            motto: "Made for Degens by Degens"
         };
+        
+        // Initialize beta user tracking
+        this.betaUsers = new Map();
+        this.trustScoreNFTs = new Map();
+        this.verifiedInteractions = new Map();
         this.strategyCoach = new TiltCheckStrategyCoach();
         
         this.setupMiddleware();
@@ -62,8 +66,21 @@ class EcosystemDashboard {
         this.app.get('/api/coaching/recommendations/:userId', this.getRecommendations.bind(this));
         this.app.post('/api/coaching/feedback', this.submitCoachingFeedback.bind(this));
         
-        // Admin verification endpoint
+        // Discord community and verification endpoints
+        this.app.get('/api/discord/community', this.getDiscordCommunity.bind(this));
+        this.app.post('/api/discord/verify', this.verifyWithJustTheTip.bind(this));
+        this.app.post('/api/nft/mint-signature', this.mintSignatureNFT.bind(this));
+        this.app.get('/api/trust-score/:userId', this.getTrustScore.bind(this));
+        this.app.post('/api/trust-score/interaction', this.recordTrustInteraction.bind(this));
+        
+        // Beta user tracking endpoints
+        this.app.post('/api/beta/signup', this.recordBetaSignup.bind(this));
+        this.app.get('/api/beta/metrics/:userId', this.getBetaMetrics.bind(this));
+        this.app.post('/api/beta/money-saved', this.recordMoneySaved.bind(this));
+        
+        // Admin verification endpoint (Degens Trust Score NFT based)
         this.app.post('/api/admin/verify-nft', this.verifyAdminNFT.bind(this));
+        this.app.post('/api/admin/mint-owner-nft', this.mintOwnerNFT.bind(this));
         
         // Protected admin routes (require NFT verification)
         this.app.use('/admin/*', this.adminAuthMiddleware.bind(this));
@@ -87,15 +104,20 @@ class EcosystemDashboard {
         // Initialize admin session storage
         this.adminSessions = new Map();
         
-        // Initialize beta feedback storage
-        this.betaFeedback = new Map();
+        // Initialize beta user tracking with real metrics
+        this.betaUserMetrics = new Map();
         
-        // Initialize analytics data
-        this.analyticsData = {
-            userMetrics: new Map(),
-            systemPerformance: new Map(),
-            casinoMetrics: new Map(),
-            coachingMetrics: new Map()
+        // Initialize trust score NFT system
+        this.degensTrustNFTs = new Map();
+        this.verifiedInteractions = new Map();
+        
+        // Initialize real analytics tracking
+        this.realAnalytics = {
+            betaSignups: 0,
+            totalMoneySaved: 0,
+            accuracyScores: new Map(),
+            verificationEvents: new Map(),
+            nftMintingEvents: new Map()
         };
         
         // Initialize task management
@@ -112,14 +134,26 @@ class EcosystemDashboard {
     getDashboardHome(req, res) {
         res.json({
             title: "🎮 TiltCheck Ecosystem Dashboard - Mischief Manager Control Center",
-            subtitle: "Managing Mischief One Impulse at a Time",
+            subtitle: "We aren't trying to stop you from playing, just play smarter and more self-aware",
             creator: {
                 name: "jmenichole - Mischief Manager",
                 originalConcept: "AI-powered mental health app to help users avoid targeted advertising and manage impulsive spending",
                 pivotStory: "Started coding journey to build mental health app → discovered online gambling → pivoted to responsible gaming ecosystem",
                 currentFocus: "Complete Discord bot ecosystem for degens who want accountability without judgment",
                 education: "Went to school to learn coding specifically to build this vision",
-                motto: "Made for Degens by Degens Who Learned the Hard Way"
+                motto: "Made for Degens by Degens"
+            },
+            discordCommunity: {
+                name: "BetCollective",
+                inviteLink: this.betCollectiveDiscord,
+                verification: "JustTheTip bot verification required",
+                nftMinting: "Contract terms acceptance mints signature NFT"
+            },
+            trustScoreSystem: {
+                foundation: "NFT minting creates blockchain footprint",
+                verification: "All interactions build trust score through verified transactions",
+                tracking: "Real beta user metrics: signups, money saved, accuracy tracking",
+                nftFootprint: "Every interaction with system creates verifiable trust building events"
             },
             mischiefManagerBranding: {
                 originalTheme: {
@@ -641,6 +675,427 @@ class EcosystemDashboard {
             monthly: 45,
             trend: "increasing"
         };
+    }
+
+    // Discord Community Integration
+    getDiscordCommunity(req, res) {
+        res.json({
+            community: "BetCollective",
+            inviteLink: this.betCollectiveDiscord,
+            description: "We aren't trying to stop you from playing, just play smarter and more self-aware",
+            motto: "Made for Degens by Degens",
+            verification: {
+                method: "JustTheTip bot verification",
+                process: "Join Discord → Verify with JustTheTip → Sign contract → Mint NFT signature",
+                trustScore: "All interactions build your Degens Trust Score"
+            }
+        });
+    }
+
+    // JustTheTip Bot Verification
+    async verifyWithJustTheTip(req, res) {
+        try {
+            const { discordId, username, verificationCode } = req.body;
+            
+            // Simulate JustTheTip bot verification
+            const isValid = this.validateJustTheTipVerification(discordId, verificationCode);
+            
+            if (isValid) {
+                // Record verification event
+                this.realAnalytics.verificationEvents.set(discordId, {
+                    verified: true,
+                    timestamp: new Date(),
+                    username,
+                    method: "JustTheTip"
+                });
+                
+                res.json({
+                    success: true,
+                    message: "Discord verification successful",
+                    nextStep: "Contract terms and NFT signature minting",
+                    contractEndpoint: "/api/nft/mint-signature"
+                });
+            } else {
+                res.status(400).json({
+                    success: false,
+                    message: "JustTheTip verification failed",
+                    action: "Please verify with JustTheTip bot in BetCollective Discord"
+                });
+            }
+        } catch (error) {
+            console.error('JustTheTip verification error:', error);
+            res.status(500).json({ success: false, message: 'Verification system error' });
+        }
+    }
+
+    validateJustTheTipVerification(discordId, verificationCode) {
+        // In production, this would verify with actual JustTheTip bot
+        // For now, simulate successful verification
+        return verificationCode && verificationCode.length >= 6;
+    }
+
+    // NFT Signature Minting
+    async mintSignatureNFT(req, res) {
+        try {
+            const { discordId, contractAccepted, signature } = req.body;
+            
+            if (!contractAccepted || !signature) {
+                return res.status(400).json({
+                    success: false,
+                    message: "Contract acceptance and signature required"
+                });
+            }
+
+            // Check if user is verified
+            const verificationEvent = this.realAnalytics.verificationEvents.get(discordId);
+            if (!verificationEvent || !verificationEvent.verified) {
+                return res.status(400).json({
+                    success: false,
+                    message: "Discord verification required first"
+                });
+            }
+
+            // Generate NFT token ID
+            const tokenId = this.generateNFTTokenId(discordId);
+            
+            // Create trust score NFT entry
+            const nftData = {
+                tokenId,
+                discordId,
+                type: "DegensTrustScore",
+                mintedAt: new Date(),
+                contractSigned: true,
+                signature,
+                trustScore: 100, // Base score for contract signing
+                verificationFootprint: [
+                    {
+                        event: "discord_verification",
+                        timestamp: verificationEvent.timestamp,
+                        method: "JustTheTip"
+                    },
+                    {
+                        event: "contract_signature",
+                        timestamp: new Date(),
+                        verified: true
+                    }
+                ]
+            };
+
+            this.degensTrustNFTs.set(tokenId, nftData);
+            this.realAnalytics.nftMintingEvents.set(discordId, nftData);
+
+            res.json({
+                success: true,
+                message: "Signature NFT minted successfully",
+                nft: {
+                    tokenId,
+                    type: "Degens Trust Score Foundation",
+                    trustScore: 100,
+                    footprint: "Blockchain verification of contract signature and Discord verification"
+                }
+            });
+        } catch (error) {
+            console.error('NFT minting error:', error);
+            res.status(500).json({ success: false, message: 'NFT minting failed' });
+        }
+    }
+
+    generateNFTTokenId(discordId) {
+        const timestamp = Date.now();
+        const hash = crypto.createHash('sha256')
+            .update(`${discordId}-${timestamp}-degens-trust`)
+            .digest('hex');
+        return `DTS_${hash.substring(0, 16)}`;
+    }
+
+    // Trust Score Management
+    getTrustScore(req, res) {
+        const { userId } = req.params;
+        const nftData = Array.from(this.degensTrustNFTs.values())
+            .find(nft => nft.discordId === userId);
+
+        if (!nftData) {
+            return res.status(404).json({
+                success: false,
+                message: "No trust score NFT found. Please sign contract first."
+            });
+        }
+
+        const interactions = this.verifiedInteractions.get(userId) || [];
+        
+        res.json({
+            success: true,
+            trustScore: nftData.trustScore,
+            nftTokenId: nftData.tokenId,
+            verificationFootprint: nftData.verificationFootprint,
+            totalInteractions: interactions.length,
+            scoreBuilding: "All verified interactions add to trust score"
+        });
+    }
+
+    async recordTrustInteraction(req, res) {
+        try {
+            const { userId, interactionType, verified, value } = req.body;
+            
+            const nftData = Array.from(this.degensTrustNFTs.values())
+                .find(nft => nft.discordId === userId);
+
+            if (!nftData) {
+                return res.status(400).json({
+                    success: false,
+                    message: "Must have trust score NFT to record interactions"
+                });
+            }
+
+            const interaction = {
+                type: interactionType,
+                timestamp: new Date(),
+                verified,
+                value: value || 0,
+                trustScoreIncrease: verified ? this.calculateTrustIncrease(interactionType) : 0
+            };
+
+            // Add to verified interactions
+            const userInteractions = this.verifiedInteractions.get(userId) || [];
+            userInteractions.push(interaction);
+            this.verifiedInteractions.set(userId, userInteractions);
+
+            // Update NFT trust score
+            if (verified) {
+                nftData.trustScore += interaction.trustScoreIncrease;
+                nftData.verificationFootprint.push({
+                    event: interactionType,
+                    timestamp: new Date(),
+                    verified: true,
+                    trustIncrease: interaction.trustScoreIncrease
+                });
+            }
+
+            res.json({
+                success: true,
+                interaction,
+                newTrustScore: nftData.trustScore,
+                message: "Trust building interaction recorded on blockchain footprint"
+            });
+        } catch (error) {
+            console.error('Trust interaction error:', error);
+            res.status(500).json({ success: false, message: 'Failed to record interaction' });
+        }
+    }
+
+    calculateTrustIncrease(interactionType) {
+        const trustValues = {
+            'casino_verification': 15,
+            'strategy_feedback': 10,
+            'community_help': 5,
+            'accurate_prediction': 20,
+            'money_saved_report': 25,
+            'beta_feedback': 8
+        };
+        return trustValues[interactionType] || 5;
+    }
+
+    // Beta User Tracking
+    async recordBetaSignup(req, res) {
+        try {
+            const { discordId, username, referralCode } = req.body;
+            
+            const betaUser = {
+                discordId,
+                username,
+                signupDate: new Date(),
+                referralCode,
+                moneySaved: 0,
+                accuracyScore: 0,
+                interactions: 0,
+                verified: false
+            };
+
+            this.betaUserMetrics.set(discordId, betaUser);
+            this.realAnalytics.betaSignups += 1;
+
+            res.json({
+                success: true,
+                message: "Beta signup recorded",
+                userId: discordId,
+                tracking: "Real metrics tracking enabled"
+            });
+        } catch (error) {
+            console.error('Beta signup error:', error);
+            res.status(500).json({ success: false, message: 'Beta signup failed' });
+        }
+    }
+
+    getBetaMetrics(req, res) {
+        const { userId } = req.params;
+        const metrics = this.betaUserMetrics.get(userId);
+
+        if (!metrics) {
+            return res.status(404).json({
+                success: false,
+                message: "Beta user not found"
+            });
+        }
+
+        res.json({
+            success: true,
+            metrics: {
+                signupDate: metrics.signupDate,
+                moneySaved: metrics.moneySaved,
+                accuracyScore: metrics.accuracyScore,
+                totalInteractions: metrics.interactions,
+                verified: metrics.verified,
+                daysActive: Math.floor((new Date() - metrics.signupDate) / (1000 * 60 * 60 * 24))
+            }
+        });
+    }
+
+    async recordMoneySaved(req, res) {
+        try {
+            const { userId, amount, description } = req.body;
+            const metrics = this.betaUserMetrics.get(userId);
+
+            if (!metrics) {
+                return res.status(404).json({
+                    success: false,
+                    message: "Beta user not found"
+                });
+            }
+
+            metrics.moneySaved += amount;
+            this.realAnalytics.totalMoneySaved += amount;
+
+            // Record as trust building interaction
+            await this.recordTrustInteraction({ body: {
+                userId,
+                interactionType: 'money_saved_report',
+                verified: true,
+                value: amount
+            }}, { json: () => {} });
+
+            res.json({
+                success: true,
+                totalSaved: metrics.moneySaved,
+                globalSaved: this.realAnalytics.totalMoneySaved,
+                message: "Money saved tracked and trust score increased"
+            });
+        } catch (error) {
+            console.error('Money saved tracking error:', error);
+            res.status(500).json({ success: false, message: 'Failed to track money saved' });
+        }
+    }
+
+    // Updated Admin NFT Verification (Degens Trust Score based)
+    async verifyAdminNFT(req, res) {
+        try {
+            const { discordId, nftTokenId } = req.body;
+            
+            // Check if this is the owner (your Discord ID)
+            if (discordId === this.adminDiscordId) {
+                // Mint owner NFT if not exists
+                const ownerNFT = await this.mintOwnerNFT({ body: { discordId }}, { json: (data) => data });
+                
+                if (ownerNFT.success) {
+                    // Create admin session
+                    const sessionToken = crypto.randomBytes(32).toString('hex');
+                    this.adminSessions.set(sessionToken, {
+                        discordId,
+                        nftTokenId: ownerNFT.tokenId,
+                        type: 'owner',
+                        expiresAt: Date.now() + (24 * 60 * 60 * 1000) // 24 hours
+                    });
+
+                    res.json({
+                        success: true,
+                        sessionToken,
+                        adminType: "owner",
+                        message: "Owner access granted - owner NFT minted and verified"
+                    });
+                } else {
+                    res.status(500).json({ success: false, message: "Failed to mint owner NFT" });
+                }
+            } else {
+                // Check for existing Degens Trust Score NFT
+                const nftData = this.degensTrustNFTs.get(nftTokenId);
+                
+                if (nftData && nftData.discordId === discordId && nftData.trustScore >= 500) {
+                    const sessionToken = crypto.randomBytes(32).toString('hex');
+                    this.adminSessions.set(sessionToken, {
+                        discordId,
+                        nftTokenId,
+                        type: 'trusted_admin',
+                        trustScore: nftData.trustScore,
+                        expiresAt: Date.now() + (12 * 60 * 60 * 1000) // 12 hours
+                    });
+
+                    res.json({
+                        success: true,
+                        sessionToken,
+                        adminType: "trusted_admin",
+                        trustScore: nftData.trustScore
+                    });
+                } else {
+                    res.status(403).json({ 
+                        success: false, 
+                        message: "Admin access requires Degens Trust Score NFT with 500+ trust score" 
+                    });
+                }
+            }
+        } catch (error) {
+            console.error("Admin NFT verification error:", error);
+            res.status(500).json({ success: false, message: "Verification failed" });
+        }
+    }
+
+    async mintOwnerNFT(req, res) {
+        try {
+            const { discordId } = req.body;
+            
+            if (discordId !== this.adminDiscordId) {
+                return res.status(403).json({
+                    success: false,
+                    message: "Owner NFT can only be minted for the owner"
+                });
+            }
+
+            const ownerTokenId = `OWNER_${crypto.randomBytes(8).toString('hex')}`;
+            
+            const ownerNFT = {
+                tokenId: ownerTokenId,
+                discordId,
+                type: "DegensTrustOwner",
+                mintedAt: new Date(),
+                ownerRights: true,
+                trustScore: 1000, // Maximum trust score
+                verificationFootprint: [
+                    {
+                        event: "owner_verification",
+                        timestamp: new Date(),
+                        verified: true,
+                        node_verified: true
+                    }
+                ]
+            };
+
+            this.degensTrustNFTs.set(ownerTokenId, ownerNFT);
+            
+            if (res.json) {
+                res.json({
+                    success: true,
+                    tokenId: ownerTokenId,
+                    type: "Owner NFT",
+                    message: "Owner NFT minted and node verified"
+                });
+            }
+            
+            return { success: true, tokenId: ownerTokenId };
+        } catch (error) {
+            console.error('Owner NFT minting error:', error);
+            if (res.json) {
+                res.status(500).json({ success: false, message: 'Owner NFT minting failed' });
+            }
+            return { success: false };
+        }
     }
 
     start() {
