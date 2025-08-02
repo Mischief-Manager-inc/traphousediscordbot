@@ -257,20 +257,28 @@ class UnifiedEcosystemServer {
 
         this.app.get('/nft', (req, res) => {
             res.json({
-                title: "TrapHouse NFT Collection",
-                description: "Community-driven NFT collection with utility integration",
-                status: "🎨 Collection Active",
+                title: "TrapHouse NFT Collection - Degens Against Decency Cards",
+                description: "Community-driven NFT collection with utility integration and card game mechanics",
+                status: "🎨 Collection Active - Card Game Integration",
                 collections: {
-                    degens_saga: "Limited edition card game NFTs",
+                    degens_saga_cards: "Limited edition Degens Against Decency game cards",
                     community_badges: "Achievement and rank NFTs", 
-                    swc_verification: "Stand With Crypto coalition NFTs"
+                    swc_verification: "Stand With Crypto coalition NFTs",
+                    tournament_rewards: "Special tournament winner cards"
+                },
+                card_game_integration: {
+                    playable_cards: "Each NFT represents a playable card in the game",
+                    card_trading: "Trade cards with other players",
+                    tournament_prizes: "Win rare NFT cards in tournaments",
+                    game_access: `${req.protocol}://${req.get('host')}/degensagainstdecency`
                 },
                 verification: {
                     swc_nft_id: "1400992867425452092",
                     wallet: "0xdD5bD7849E0AbA97f1BE680E0EC1b7db59Fc74AA",
                     verified: true
                 },
-                marketplace: "Coming Soon",
+                marketplace: "Coming Soon - NFT Card Trading",
+                beta_access: `${req.protocol}://${req.get('host')}/beta`,
                 footer: this.getEcosystemFooter()
             });
         });
@@ -421,7 +429,7 @@ class UnifiedEcosystemServer {
                     "CollectClock Integration",
                     "Degens Card Game"
                 ],
-                support: "https://discord.gg/K3Md6aZx",
+                support: "https://discord.gg/betcollective",
                 footer: this.getEcosystemFooter()
             });
         });
@@ -434,7 +442,7 @@ class UnifiedEcosystemServer {
                 portfolio: "https://jmenichole.github.io/Portfolio/",
                 github: "https://github.com/jmenichole/trap-house-discord-bot",
                 linkedin: "https://www.linkedin.com/in/jeremy-nicolosi-7b1aaba4/",
-                kofi: "https://ko-fi.com/traphouse",
+                kofi: "https://ko-fi.com/jmenichole0",
                 projects: {
                     collectClock: "https://jmenichole.github.io/CollectClock/",
                     trapHouseBot: `${req.protocol}://${req.get('host')}/bot`,
@@ -659,7 +667,7 @@ class UnifiedEcosystemServer {
                 error: 'Internal Server Error',
                 message: 'Something went wrong on our end.',
                 timestamp: new Date().toISOString(),
-                support: 'https://discord.gg/K3Md6aZx',
+                support: 'https://discord.gg/betcollective',
                 footer: this.getEcosystemFooter()
             });
         });
