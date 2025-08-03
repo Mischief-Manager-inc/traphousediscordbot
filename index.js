@@ -552,7 +552,7 @@ client.on('messageCreate', async (message) => {
     else if (command.startsWith('$tip') || command.startsWith('$balance') || command.startsWith('$history') || command.startsWith('$solusdc') || 
              command.startsWith('$wallet') || command.startsWith('$withdraw') || command.startsWith('$airdrop') || command.startsWith('$blockchain')) {
         // Only allow crypto commands on JustTheTip bot
-        if (process.env.CURRENT_BOT !== 'JUSTTHETIP') {
+        if (botRoleManager.currentBot !== 'JUSTTHETIP') {
             return message.reply('💡 **Crypto commands are only available on JustTheTip bot!**\n\nUse `node launcher.js justthetip` to run the JustTheTip bot with crypto features.\n\nOr switch to JustTheTip bot in your Discord server.');
         }
         
@@ -593,7 +593,7 @@ client.on('messageCreate', async (message) => {
     // Crypto Tip Admin commands - Admin only (JUSTTHETIP BOT ONLY)
     else if (command.startsWith('!tip-admin')) {
         // Only allow crypto admin commands on JustTheTip bot
-        if (process.env.CURRENT_BOT !== 'JUSTTHETIP') {
+        if (botRoleManager.currentBot !== 'JUSTTHETIP') {
             return message.reply('💡 **Crypto admin commands are only available on JustTheTip bot!**\n\nUse `node launcher.js justthetip` to run the JustTheTip bot with crypto features.');
         }
         
