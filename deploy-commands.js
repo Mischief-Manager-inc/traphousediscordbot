@@ -107,6 +107,11 @@ async function deployCommands() {
 // Command line argument handling
 const args = process.argv.slice(2);
 
+// If no arguments provided, default to --guild
+if (args.length === 0) {
+    args.push('--guild');
+}
+
 if (args.includes('--help') || args.includes('-h')) {
     console.log(`
 🎯 Slash Command Deployment Tool
