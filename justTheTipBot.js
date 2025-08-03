@@ -7,6 +7,35 @@ const { addRespectPoints, handleRespectCommand, handleShowoffPost, handleFireRea
 // Smart crypto tipping + accountability buddy + vault suggestions
 // "For degens, by degens - but make it financially responsible... somehow"
 
+// ========== DM UTILITY FUNCTION ==========
+async function sendJustTheTipDM(message, content) {
+    try {
+        // First, acknowledge in the channel that we're sending a DM
+        await message.reply('💡 **JustTheTip response sent to your DMs!** Check your direct messages for privacy and security. 🔒');
+        
+        // Send the actual response via DM
+        if (typeof content === 'string') {
+            await message.author.send(content);
+        } else {
+            // Handle embed objects
+            await message.author.send(content);
+        }
+    } catch (error) {
+        console.error('Failed to send DM:', error);
+        // Fallback to channel if DM fails
+        await message.reply('❌ **Unable to send DM!** Please check your privacy settings to allow DMs from server members.\n\n*For security reasons, JustTheTip responses are sent privately.*');
+        
+        // If user wants the response anyway, they can use a flag
+        if (message.content.includes('--public')) {
+            if (typeof content === 'string') {
+                await message.reply(content);
+            } else {
+                await message.reply(content);
+            }
+        }
+    }
+}
+
 class JustTheTipManager {
     constructor() {
         this.userVaults = new Map(); // userId -> vault data
@@ -109,7 +138,7 @@ async function handleAccountabilityBuddy(message, args) {
 
 async function handleBuddyPairing(message, targetUser) {
     if (!targetUser) {
-        return message.reply('❌ Usage: `!buddy pair @username` - Find your financial accountability bestie');
+        return await sendJustTheTipDM(message, '❌ Usage: `!buddy pair @username` - Find your financial accountability bestie');
     }
 
     const embed = {
@@ -138,7 +167,7 @@ async function handleBuddyPairing(message, targetUser) {
         }
     };
 
-    await message.reply({ embeds: [embed] });
+    await sendJustTheTipDM(message, { embeds: [embed] });
 }
 
 // ========== SMART CRYPTO TIPPING ==========
@@ -149,7 +178,7 @@ async function handleSmartTip(message, args) {
     const reason = args.slice(2).join(' ') || 'being based';
 
     if (!amount || !recipient) {
-        return message.reply('❌ Usage: `!tip 0.001 @user reason` - Spread the alpha, share the wealth');
+        return await sendJustTheTipDM(message, '❌ Usage: `!tip 0.001 @user reason` - Spread the alpha, share the wealth');
     }
 
     // Track degen behavior
@@ -203,7 +232,7 @@ async function handleSmartTip(message, args) {
         }
     };
 
-    await message.reply({ embeds: [embed] });
+    await sendJustTheTipDM(message, { embeds: [embed] });
     
     // Auto-notify accountability buddy if exists
     await notifyAccountabilityBuddy(message.author.id, 'tip', amount, actualReason);
@@ -254,7 +283,7 @@ async function handleVaultSuggestion(message, args) {
         }
     };
 
-    await message.reply({ embeds: [embed] });
+    await sendJustTheTipDM(message, { embeds: [embed] });
 }
 
 // ========== DEGEN METRICS & ANALYSIS ==========
@@ -300,7 +329,7 @@ async function handleDegenMetrics(message) {
         }
     };
 
-    await message.reply({ embeds: [embed] });
+    await sendJustTheTipDM(message, { embeds: [embed] });
 }
 
 // ========== MAIN COMMAND HANDLERS ==========
@@ -339,7 +368,7 @@ async function showJustTheTipHelp(message) {
     const embed = {
         color: 0xff6b35,
         title: '💡 JustTheTip - Smart Crypto Assistant',
-        description: '*The accountability buddy you never knew you needed*\n\n💜 Made for degens by degens - but make it financially responsible',
+        description: '*The accountability buddy you never knew you needed*\n\n💜 Made for degens by degens - but make it financially responsible\n\n🔒 **All responses sent via DM for privacy**',
         fields: [
             {
                 name: '💰 Smart Tipping',
@@ -362,17 +391,22 @@ async function showJustTheTipHelp(message) {
                 inline: false
             },
             {
+                name: '🔒 Privacy & Security',
+                value: '• All JustTheTip responses sent via DM\n• Your financial data stays private\n• No public wallet information\n• Secure accountability buddy system\n• Add `--public` flag if you want public responses',
+                inline: false
+            },
+            {
                 name: '🎯 The Vibe',
                 value: 'We\'re here to help you make better financial decisions while maintaining that chronically online energy. It\'s financial responsibility with a sense of humor.',
                 inline: false
             }
         ],
         footer: {
-            text: 'JustTheTip: Where memes meet meaningful financial advice'
+            text: 'JustTheTip: Where memes meet meaningful financial advice • DM responses for privacy'
         }
     };
 
-    await message.reply({ embeds: [embed] });
+    await sendJustTheTipDM(message, { embeds: [embed] });
 }
 
 // ========== UTILITY FUNCTIONS ==========
@@ -492,7 +526,7 @@ async function handleBuddyCheck(message) {
         }
     };
 
-    await message.reply({ embeds: [embed] });
+    await sendJustTheTipDM(message, { embeds: [embed] });
 }
 
 async function handleBuddyRoast(message, args) {
@@ -507,7 +541,7 @@ async function handleBuddyRoast(message, args) {
     
     const randomRoast = roasts[Math.floor(Math.random() * roasts.length)];
     
-    await message.reply(`🔥 **Accountability Buddy Roast Incoming:**\n\n*${randomRoast}*\n\n💜 Sent with love and concern for your financial wellbeing.`);
+    await sendJustTheTipDM(message, `🔥 **Accountability Buddy Roast Incoming:**\n\n*${randomRoast}*\n\n💜 Sent with love and concern for your financial wellbeing.`);
 }
 
 async function handleBuddyEncouragement(message) {
@@ -521,7 +555,7 @@ async function handleBuddyEncouragement(message) {
     
     const randomEncouragement = encouragements[Math.floor(Math.random() * encouragements.length)];
     
-    await message.reply(`🤗 **Accountability Buddy Encouragement:**\n\n*${randomEncouragement}*\n\n*Keep being awesome and making smart choices!*`);
+    await sendJustTheTipDM(message, `🤗 **Accountability Buddy Encouragement:**\n\n*${randomEncouragement}*\n\n*Keep being awesome and making smart choices!*`);
 }
 
 async function showAccountabilityHelp(message) {
@@ -551,7 +585,7 @@ async function showAccountabilityHelp(message) {
         }
     };
 
-    await message.reply({ embeds: [embed] });
+    await sendJustTheTipDM(message, { embeds: [embed] });
 }
 
 async function handleYoloMode(message, args) {
@@ -583,7 +617,7 @@ async function handleYoloMode(message, args) {
         }
     };
 
-    await message.reply({ embeds: [embed] });
+    await sendJustTheTipDM(message, { embeds: [embed] });
 }
 
 async function handleJTTStatus(message) {
@@ -622,7 +656,7 @@ async function handleJTTStatus(message) {
         }
     };
 
-    await message.reply({ embeds: [embed] });
+    await sendJustTheTipDM(message, { embeds: [embed] });
 }
 
 async function handleJTTLeaderboard(message) {
@@ -662,7 +696,7 @@ async function handleJTTLeaderboard(message) {
         }
     };
 
-    await message.reply({ embeds: [embed] });
+    await sendJustTheTipDM(message, { embeds: [embed] });
 }
 
 module.exports = { justTheTipManager, handleJustTheTip, JustTheTipManager };

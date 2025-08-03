@@ -36,6 +36,35 @@ const ecosystem = new EcosystemManager();
 const enhancedSystems = new EnhancedSystemIntegration();
 const personalizedTiltProtection = new PersonalizedTiltProtection();
 
+// ========== DM UTILITY FUNCTION FOR CRYPTO COMMANDS ==========
+async function sendCryptoDM(message, content) {
+    try {
+        // First, acknowledge in the channel that we're sending a DM
+        await message.reply('💰 **Crypto response sent to your DMs!** Check your direct messages for security and privacy. 🔒');
+        
+        // Send the actual response via DM
+        if (typeof content === 'string') {
+            await message.author.send(content);
+        } else {
+            // Handle embed objects
+            await message.author.send(content);
+        }
+    } catch (error) {
+        console.error('Failed to send crypto DM:', error);
+        // Fallback to channel if DM fails
+        await message.reply('❌ **Unable to send DM!** Please check your privacy settings to allow DMs from server members.\n\n*For security reasons, crypto responses are sent privately.*\n\n*Add `--public` to your command if you want a public response.*');
+        
+        // If user wants the response anyway, they can use a flag
+        if (message.content.includes('--public')) {
+            if (typeof content === 'string') {
+                await message.reply(content);
+            } else {
+                await message.reply(content);
+            }
+        }
+    }
+}
+
 // Initialize Enhanced Tilt Setup (will be initialized after solscanTracker is ready)
 let enhancedTiltSetup;
 let paymentManager; // Will be initialized after client is ready
@@ -553,7 +582,7 @@ client.on('messageCreate', async (message) => {
              command.startsWith('$wallet') || command.startsWith('$withdraw') || command.startsWith('$airdrop') || command.startsWith('$blockchain')) {
         // Only allow crypto commands on JustTheTip bot
         if (botRoleManager.currentBot !== 'JUSTTHETIP') {
-            return message.reply('💡 **Crypto commands are only available on JustTheTip bot!**\n\nUse `node launcher.js justthetip` to run the JustTheTip bot with crypto features.\n\nOr switch to JustTheTip bot in your Discord server.');
+            return message.reply('💡 **Crypto commands are only available on JustTheTip bot!**\n\nUse `node launcher.js justthetip` to run the JustTheTip bot with crypto features.\n\nOr switch to JustTheTip bot in your Discord server.\n\n🔒 *All crypto responses are sent via DM for security.*');
         }
         
         if (!cryptoTipManager) {
@@ -561,32 +590,40 @@ client.on('messageCreate', async (message) => {
         }
 
         try {
+            // Create a message wrapper that redirects replies to DMs
+            const dmMessage = {
+                ...message,
+                reply: async (content) => {
+                    return await sendCryptoDM(message, content);
+                }
+            };
+
             // Enhanced blockchain commands (if available)
             if (command.startsWith('$balance') && enhancedCryptoTipManager && blockchainCommands) {
-                await blockchainCommands.handleEnhancedBalance(message);
+                await blockchainCommands.handleEnhancedBalance(dmMessage);
             } else if (command.startsWith('$wallet') && enhancedCryptoTipManager && blockchainCommands) {
-                await blockchainCommands.handleWallet(message, args);
+                await blockchainCommands.handleWallet(dmMessage, args);
             } else if (command.startsWith('$withdraw') && enhancedCryptoTipManager && blockchainCommands) {
-                await blockchainCommands.handleWithdraw(message, args);
+                await blockchainCommands.handleWithdraw(dmMessage, args);
             } else if (command.startsWith('$airdrop') && enhancedCryptoTipManager && blockchainCommands) {
-                await blockchainCommands.handleAirdrop(message, args);
+                await blockchainCommands.handleAirdrop(dmMessage, args);
             } else if (command.startsWith('$blockchain') && enhancedCryptoTipManager && blockchainCommands) {
-                await blockchainCommands.handleBlockchainStatus(message);
+                await blockchainCommands.handleBlockchainStatus(dmMessage);
             } 
             // Original virtual commands
             else if (command.startsWith('$tip')) {
-                await cryptoTipManager.handleTipCommand(message, args);
+                await cryptoTipManager.handleTipCommand(dmMessage, args);
             } else if (command.startsWith('$balance')) {
-                await cryptoTipManager.handleBalanceCommand(message, args);
+                await cryptoTipManager.handleBalanceCommand(dmMessage, args);
             } else if (command.startsWith('$history')) {
-                await cryptoTipManager.handleHistoryCommand(message, args);
+                await cryptoTipManager.handleHistoryCommand(dmMessage, args);
             } else if (command.startsWith('$solusdc')) {
                 // Special SOLUSDC testing command
-                await handleSOLUSDCTestCommand(message, args, cryptoTipManager, cryptoTipAdmin);
+                await handleSOLUSDCTestCommand(dmMessage, args, cryptoTipManager, cryptoTipAdmin);
             }
         } catch (error) {
             console.error('Crypto tip command error:', error);
-            await message.reply('❌ An error occurred with the crypto tip system.');
+            await sendCryptoDM(message, '❌ An error occurred with the crypto tip system.');
         }
     }
     
@@ -594,7 +631,7 @@ client.on('messageCreate', async (message) => {
     else if (command.startsWith('!tip-admin')) {
         // Only allow crypto admin commands on JustTheTip bot
         if (botRoleManager.currentBot !== 'JUSTTHETIP') {
-            return message.reply('💡 **Crypto admin commands are only available on JustTheTip bot!**\n\nUse `node launcher.js justthetip` to run the JustTheTip bot with crypto features.');
+            return message.reply('💡 **Crypto admin commands are only available on JustTheTip bot!**\n\nUse `node launcher.js justthetip` to run the JustTheTip bot with crypto features.\n\n🔒 *All admin responses are sent via DM for security.*');
         }
         
         if (!cryptoTipAdmin) {
@@ -602,10 +639,18 @@ client.on('messageCreate', async (message) => {
         }
 
         try {
-            await cryptoTipAdmin.handleAdminCommand(message, args);
+            // Create a message wrapper that redirects replies to DMs for admin commands too
+            const dmMessage = {
+                ...message,
+                reply: async (content) => {
+                    return await sendCryptoDM(message, content);
+                }
+            };
+            
+            await cryptoTipAdmin.handleAdminCommand(dmMessage, args);
         } catch (error) {
             console.error('Crypto tip admin command error:', error);
-            await message.reply('❌ An error occurred with the crypto tip admin system.');
+            await sendCryptoDM(message, '❌ An error occurred with the crypto tip admin system.');
         }
     }
     
