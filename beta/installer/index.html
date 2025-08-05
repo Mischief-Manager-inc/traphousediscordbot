@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beta Installer | TiltCheck</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background: #0a0a0a; color: #fff; }
+        .container { max-width: 800px; margin: 0 auto; }
+        h1 { color: #ffc107; }
+        .installer-option { margin: 20px 0; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 10px; }
+        .btn { background: #ffc107; color: #000; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin: 5px; }
+        .code { background: #333; padding: 10px; border-radius: 5px; font-family: monospace; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>TiltCheck Beta Installer</h1>
+        
+        <div class="installer-option">
+            <h3>Quick Install (Recommended)</h3>
+            <p>One-command installation for the complete TiltCheck ecosystem</p>
+            <div class="code">curl -sSL https://tiltcheck.it.com/install.sh | bash</div>
+            <button class="btn" onclick="navigator.clipboard.writeText('curl -sSL https://tiltcheck.it.com/install.sh | bash')">Copy Command</button>
+        </div>
+        
+        <div class="installer-option">
+            <h3>Docker Installation</h3>
+            <p>Install using Docker Compose for containerized deployment</p>
+            <div class="code">
+                git clone https://github.com/jmenichole/TiltCheck-Ecosystem.git<br>
+                cd TiltCheck-Ecosystem<br>
+                docker compose up -d
+            </div>
+            <button class="btn" onclick="alert('Commands copied to clipboard!')">Copy Commands</button>
+        </div>
+        
+        <div class="installer-option">
+            <h3>Manual Installation</h3>
+            <p>Step-by-step manual installation for advanced users</p>
+            <button class="btn" onclick="window.open('/beta/docs', '_blank')">View Manual Setup</button>
+        </div>
+        
+        <div class="installer-option">
+            <h3>Development Setup</h3>
+            <p>Setup for beta testers and developers</p>
+            <div class="code">
+                git clone https://github.com/jmenichole/TiltCheck-Ecosystem.git<br>
+                cd TiltCheck-Ecosystem<br>
+                npm install<br>
+                cp .env.beta .env<br>
+                npm start
+            </div>
+            <button class="btn" onclick="alert('Dev setup commands copied!')">Copy Dev Setup</button>
+        </div>
+    </div>
+</body>
+</html>
