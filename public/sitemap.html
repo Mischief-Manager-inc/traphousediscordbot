@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Sitemap | TiltCheck.it.com</title>
+    <meta name="description" content="Complete navigation map for the TiltCheck.it.com ecosystem.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #ffffff;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 40px 0;
+            border-bottom: 2px solid #00ff88;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #00ff88;
+            text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+            margin-bottom: 10px;
+        }
+        
+        .description {
+            font-size: 1.1rem;
+            color: #cccccc;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .sitemap-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+        }
+        
+        .sitemap-section h2 {
+            color: #00ff88;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(0, 255, 136, 0.3);
+            padding-bottom: 10px;
+        }
+        
+        .sitemap-section h3 {
+            color: #ff6b35;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            margin-top: 25px;
+        }
+        
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .sitemap-link {
+            display: block;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            border-radius: 10px;
+            padding: 15px;
+            text-decoration: none;
+            color: #ffffff;
+            transition: all 0.3s ease;
+        }
+        
+        .sitemap-link:hover {
+            border-color: #00ff88;
+            background: rgba(0, 255, 136, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 255, 136, 0.2);
+        }
+        
+        .link-title {
+            color: #00ff88;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        
+        .link-desc {
+            color: #cccccc;
+            font-size: 0.9rem;
+        }
+        
+        .external-link {
+            border-color: rgba(255, 107, 53, 0.3);
+        }
+        
+        .external-link:hover {
+            border-color: #ff6b35;
+            background: rgba(255, 107, 53, 0.1);
+        }
+        
+        .external-link .link-title {
+            color: #ff6b35;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            margin-left: 8px;
+        }
+        
+        .status-live {
+            background: rgba(0, 255, 136, 0.2);
+            color: #00ff88;
+        }
+        
+        .status-dev {
+            background: rgba(255, 107, 53, 0.2);
+            color: #ff6b35;
+        }
+        
+        .status-api {
+            background: rgba(0, 150, 255, 0.2);
+            color: #0096ff;
+        }
+        
+        .back-to-top {
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .back-to-top a {
+            background: linear-gradient(45deg, #00ff88, #ff6b35);
+            color: #000;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: bold;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .back-to-top a:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(0, 255, 136, 0.4);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            border-top: 2px solid #00ff88;
+            margin-top: 40px;
+        }
+        
+        .footer-motto {
+            font-size: 1.2rem;
+            color: #ff6b35;
+            margin-bottom: 15px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .footer-links a {
+            color: #00ff88;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .footer-links a:hover {
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">🗺️ Complete Sitemap</div>
+            <div class="description">Navigate the entire TiltCheck.it.com ecosystem</div>
+        </header>
+
+        <section class="sitemap-section">
+            <h2>🏠 Primary Pages</h2>
+            <div class="links-grid">
+                <a href="/index.html" class="sitemap-link">
+                    <div class="link-title">🏠 Home <span class="status-badge status-live">Live</span></div>
+                    <div class="link-desc">Main landing page with ecosystem overview</div>
+                </a>
+                <a href="/ecosystem.html" class="sitemap-link">
+                    <div class="link-title">🌐 Ecosystem Hub <span class="status-badge status-live">Live</span></div>
+                    <div class="link-desc">Complete ecosystem overview and navigation</div>
+                </a>
+                <a href="/compliance.html" class="sitemap-link">
+                    <div class="link-title">📋 Compliance Center <span class="status-badge status-live">Live</span></div>
+                    <div class="link-desc">Regulatory compliance and legal information</div>
+                </a>
+                <a href="/portfolio.html" class="sitemap-link">
+                    <div class="link-title">💼 Developer Portfolio <span class="status-badge status-live">Live</span></div>
+                    <div class="link-desc">jmenichole's development portfolio and projects</div>
+                </a>
+                <a href="/support.html" class="sitemap-link">
+                    <div class="link-title">🆘 Community Support <span class="status-badge status-live">Live</span></div>
+                    <div class="link-desc">Help resources and community assistance</div>
+                </a>
+            </div>
+        </section>
+
+        <section class="sitemap-section">
+            <h2>🎯 Core Applications</h2>
+            <div class="links-grid">
+                <a href="/tiltcheck.html" class="sitemap-link">
+                    <div class="link-title">🎯 TiltCheck Monitor <span class="status-badge status-dev">In Development</span></div>
+                    <div class="link-desc">Real-time gambling behavior analysis and risk assessment</div>
+                </a>
+                <a href="/casinos.html" class="sitemap-link">
+                    <div class="link-title">🎰 Casino Transparency <span class="status-badge status-dev">In Development</span></div>
+                    <div class="link-desc">Community-verified casino ratings and transparency reports</div>
+                </a>
+                <a href="/degentrustscore.html" class="sitemap-link">
+                    <div class="link-title">📊 Trust Scoring <span class="status-badge status-dev">In Development</span></div>
+                    <div class="link-desc">Blockchain-verified reputation scoring system</div>
+                </a>
+                <a href="/suslink.html" class="sitemap-link">
+                    <div class="link-title">🔍 SusLink Detection <span class="status-badge status-dev">In Development</span></div>
+                    <div class="link-desc">Community-powered link verification and safety</div>
+                </a>
+                <a href="/gamblingregulations.html" class="sitemap-link">
+                    <div class="link-title">📚 Gambling Regulations <span class="status-badge status-live">Live</span></div>
+                    <div class="link-desc">Comprehensive guide to gambling laws and regulations</div>
+                </a>
+            </div>
+        </section>
+
+        <section class="sitemap-section">
+            <h2>🎮 Gaming Ecosystem</h2>
+            <div class="links-grid">
+                <a href="/degensagainstdecency.html" class="sitemap-link">
+                    <div class="link-title">🃏 Degens Card Game <span class="status-badge status-dev">Beta</span></div>
+                    <div class="link-desc">Strategic card game with NFT integration</div>
+                </a>
+                <a href="/nft.html" class="sitemap-link">
+                    <div class="link-title">🎨 NFT Collection <span class="status-badge status-dev">Coming Soon</span></div>
+                    <div class="link-desc">Playable NFT cards and community badges</div>
+                </a>
+                <a href="/beta.html" class="sitemap-link">
+                    <div class="link-title">🧪 Beta Program <span class="status-badge status-live">Active</span></div>
+                    <div class="link-desc">Early access to experimental features</div>
+                </a>
+            </div>
+        </section>
+
+        <section class="sitemap-section">
+            <h2>🤖 Discord Integration</h2>
+            <div class="links-grid">
+                <a href="/discordbots.html" class="sitemap-link">
+                    <div class="link-title">🤖 Discord Bot Collection <span class="status-badge status-live">Online</span></div>
+                    <div class="link-desc">Complete Discord bot ecosystem</div>
+                </a>
+                <a href="/aimoverlay.html" class="sitemap-link">
+                    <div class="link-title">🎯 AIM Overlay <span class="status-badge status-dev">In Development</span></div>
+                    <div class="link-desc">Advanced Interface Management for Discord bots</div>
+                </a>
+                <a href="/traphouse.html" class="sitemap-link">
+                    <div class="link-title">🎮 TrapHouse Ecosystem <span class="status-badge status-live">Active</span></div>
+                    <div class="link-desc">Complete Discord gaming ecosystem</div>
+                </a>
+                <a href="/bot.html" class="sitemap-link">
+                    <div class="link-title">🔗 Bot Invite <span class="status-badge status-live">Live</span></div>
+                    <div class="link-desc">Invite TrapHouse Discord bot to your server</div>
+                </a>
+            </div>
+        </section>
+
+        <section class="sitemap-section">
+            <h2>👥 Team & Business</h2>
+            <div class="links-grid">
+                <a href="/mischiefmanager.html" class="sitemap-link">
+                    <div class="link-title">👤 Mischief Manager <span class="status-badge status-live">Live</span></div>
+                    <div class="link-desc">jmenichole - Lead Developer profile</div>
+                </a>
+                <a href="/pitch-deck.html" class="sitemap-link">
+                    <div class="link-title">📋 Pitch Deck <span class="status-badge status-live">Live</span></div>
+                    <div class="link-desc">Complete business overview and funding information</div>
+                </a>
+                <a href="/one-pager.html" class="sitemap-link">
+                    <div class="link-title">📄 Executive Summary <span class="status-badge status-live">Live</span></div>
+                    <div class="link-desc">Quick business overview and key metrics</div>
+                </a>
+                <a href="/whitepaper.html" class="sitemap-link">
+                    <div class="link-title">📖 Technical Whitepaper <span class="status-badge status-dev">In Development</span></div>
+                    <div class="link-desc">Technical architecture and innovation details</div>
+                </a>
+                <a href="/marketing-docs.html" class="sitemap-link">
+                    <div class="link-title">📈 Marketing Docs <span class="status-badge status-live">Live</span></div>
+                    <div class="link-desc">Marketing strategy and operations documentation</div>
+                </a>
+            </div>
+        </section>
+
+        <section class="sitemap-section">
+            <h2>🔌 API Endpoints</h2>
+            <div class="links-grid">
+                <a href="/api/health" class="sitemap-link">
+                    <div class="link-title">📊 Health Check <span class="status-badge status-api">API</span></div>
+                    <div class="link-desc">System health and status monitoring</div>
+                </a>
+                <a href="/api/navigation" class="sitemap-link">
+                    <div class="link-title">🗺️ Navigation API <span class="status-badge status-api">API</span></div>
+                    <div class="link-desc">Complete navigation structure and links</div>
+                </a>
+                <a href="/api/crypto/prices" class="sitemap-link">
+                    <div class="link-title">💰 Crypto Prices <span class="status-badge status-api">API</span></div>
+                    <div class="link-desc">Live cryptocurrency price data</div>
+                </a>
+                <a href="/api/stats" class="sitemap-link">
+                    <div class="link-title">📈 Ecosystem Stats <span class="status-badge status-api">API</span></div>
+                    <div class="link-desc">Live ecosystem metrics and performance data</div>
+                </a>
+                <a href="/api/swc/verification" class="sitemap-link">
+                    <div class="link-title">✅ SWC Verification <span class="status-badge status-api">API</span></div>
+                    <div class="link-desc">Stand With Crypto coalition verification</div>
+                </a>
+            </div>
+        </section>
+
+        <section class="sitemap-section">
+            <h2>🔗 External Integrations</h2>
+            <div class="links-grid">
+                <a href="https://tiltcheckecosystem.created.app" target="_blank" class="sitemap-link external-link">
+                    <div class="link-title">🏠 Main Ecosystem Hub <span class="status-badge status-live">External</span></div>
+                    <div class="link-desc">Primary ecosystem application platform</div>
+                </a>
+                <a href="https://tiltcheckecosystem.created.app/degens-bot" target="_blank" class="sitemap-link external-link">
+                    <div class="link-title">🎮 Degens Bot Access <span class="status-badge status-live">External</span></div>
+                    <div class="link-desc">Direct access to Degens Against Decency game</div>
+                </a>
+                <a href="https://tiltcheckecosystem.created.app/justthetip" target="_blank" class="sitemap-link external-link">
+                    <div class="link-title">💰 JustTheTip System <span class="status-badge status-live">External</span></div>
+                    <div class="link-desc">Crypto tipping and wallet management system</div>
+                </a>
+                <a href="https://jmenichole.github.io/CollectClock/" target="_blank" class="sitemap-link external-link">
+                    <div class="link-title">⏰ CollectClock <span class="status-badge status-live">External</span></div>
+                    <div class="link-desc">Time-based reward and collection system</div>
+                </a>
+                <a href="https://discord.gg/betcollective" target="_blank" class="sitemap-link external-link">
+                    <div class="link-title">💬 Discord Community <span class="status-badge status-live">External</span></div>
+                    <div class="link-desc">BetCollective Discord community hub</div>
+                </a>
+                <a href="https://github.com/jmenichole/trap-house-discord-bot" target="_blank" class="sitemap-link external-link">
+                    <div class="link-title">📂 GitHub Repository <span class="status-badge status-live">External</span></div>
+                    <div class="link-desc">Open source code repository</div>
+                </a>
+                <a href="https://ko-fi.com/jmenichole0" target="_blank" class="sitemap-link external-link">
+                    <div class="link-title">☕ Ko-fi Support <span class="status-badge status-live">External</span></div>
+                    <div class="link-desc">Support development through donations</div>
+                </a>
+            </div>
+        </section>
+
+        <div class="back-to-top">
+            <a href="/index.html">🏠 Back to Home</a>
+        </div>
+
+        <footer>
+            <div class="footer-motto">Made 4 Degens by Degens ❤️</div>
+            <div class="footer-links">
+                <a href="/index.html">Home</a>
+                <a href="https://github.com/jmenichole/trap-house-discord-bot" target="_blank">GitHub</a>
+                <a href="https://ko-fi.com/jmenichole0" target="_blank">Ko-fi</a>
+                <a href="https://discord.gg/betcollective" target="_blank">Discord</a>
+                <a href="/pitch-deck.html">Pitch Deck</a>
+            </div>
+            <div style="color: #666; font-size: 0.9rem;">
+                © 2025 TiltCheck.it.com | Complete Ecosystem Sitemap
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

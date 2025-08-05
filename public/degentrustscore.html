@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Degen Trust Score | TiltCheck.it.com</title>
+    <meta name="description" content="Blockchain-verified reputation scoring system for gaming communities and online interactions.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #0f2027 50%, #203a43 100%);
+            color: #ffffff;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 40px 0;
+            border-bottom: 2px solid #00d4ff;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #00d4ff;
+            text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+            margin-bottom: 10px;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            color: #4fd1c7;
+            margin-bottom: 15px;
+        }
+        
+        .description {
+            font-size: 1.1rem;
+            color: #cccccc;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .trust-hero {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            text-align: center;
+        }
+        
+        .trust-demo {
+            background: linear-gradient(135deg, #203a43, #0f2027);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+            border: 2px solid #00d4ff;
+            text-align: center;
+        }
+        
+        .score-display {
+            font-size: 4rem;
+            color: #00d4ff;
+            font-weight: bold;
+            text-shadow: 0 0 30px rgba(0, 212, 255, 0.8);
+            margin: 20px 0;
+        }
+        
+        .score-breakdown {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .score-component {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+        }
+        
+        .component-title {
+            color: #4fd1c7;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .component-score {
+            font-size: 2rem;
+            color: #00d4ff;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .component-desc {
+            color: #cccccc;
+            font-size: 0.9rem;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: #00d4ff;
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .feature-title {
+            color: #00d4ff;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .feature-description {
+            color: #cccccc;
+            line-height: 1.6;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        
+        .status-dev {
+            background: rgba(255, 107, 53, 0.2);
+            color: #ff6b35;
+        }
+        
+        .status-beta {
+            background: rgba(255, 193, 7, 0.2);
+            color: #ffc107;
+        }
+        
+        .status-concept {
+            background: rgba(79, 209, 199, 0.2);
+            color: #4fd1c7;
+        }
+        
+        .blockchain-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+        }
+        
+        .section-title {
+            color: #00d4ff;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .blockchain-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .blockchain-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            text-align: center;
+        }
+        
+        .blockchain-card h3 {
+            color: #00d4ff;
+            margin-bottom: 10px;
+        }
+        
+        .blockchain-card p {
+            color: #cccccc;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .verification-levels {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .level-card {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(79, 209, 199, 0.05));
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+        }
+        
+        .level-name {
+            color: #00d4ff;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .level-range {
+            color: #4fd1c7;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .level-desc {
+            color: #cccccc;
+            font-size: 0.8rem;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin: 5px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, #00d4ff, #4fd1c7);
+            color: #000;
+        }
+        
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid #00d4ff;
+            color: #00d4ff;
+        }
+        
+        .btn-secondary:hover {
+            background: #00d4ff;
+            color: #000;
+        }
+        
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 40px 0;
+            padding: 20px 0;
+            border-top: 1px solid rgba(0, 212, 255, 0.3);
+        }
+        
+        .nav-links a {
+            color: #00d4ff;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 15px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            background: rgba(0, 212, 255, 0.1);
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.8);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            border-top: 2px solid #00d4ff;
+            margin-top: 40px;
+        }
+        
+        .footer-motto {
+            font-size: 1.2rem;
+            color: #4fd1c7;
+            margin-bottom: 15px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .footer-links a {
+            color: #00d4ff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .footer-links a:hover {
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">📊 Degen Trust Score</div>
+            <div class="tagline">Blockchain-Verified Reputation System</div>
+            <div class="description">Community-driven trust scoring for gaming interactions, with blockchain verification and transparent reputation tracking.</div>
+        </header>
+
+        <section class="trust-hero">
+            <h2>🔍 What's Your Degen Trust Score?</h2>
+            <p style="color: #cccccc; margin: 20px 0; font-size: 1.1rem;">
+                Our revolutionary trust scoring system tracks your gaming behavior, community interactions, and transaction history to create a verifiable reputation score.
+            </p>
+            
+            <div class="trust-demo">
+                <h3 style="color: #4fd1c7; margin-bottom: 20px;">Sample Trust Profile</h3>
+                <div class="score-display">847</div>
+                <div style="color: #4fd1c7; font-size: 1.2rem; margin-bottom: 20px;">🏆 Trusted Degen Status</div>
+                
+                <div class="score-breakdown">
+                    <div class="score-component">
+                        <div class="component-title">Gaming History</div>
+                        <div class="component-score">92</div>
+                        <div class="component-desc">Consistent, responsible gaming patterns</div>
+                    </div>
+                    <div class="score-component">
+                        <div class="component-title">Community Rep</div>
+                        <div class="component-score">85</div>
+                        <div class="component-desc">Positive community interactions</div>
+                    </div>
+                    <div class="score-component">
+                        <div class="component-title">Transaction Trust</div>
+                        <div class="component-score">94</div>
+                        <div class="component-desc">Reliable payment history</div>
+                    </div>
+                    <div class="score-component">
+                        <div class="component-title">Verification Level</div>
+                        <div class="component-score">89</div>
+                        <div class="component-desc">Multiple verified accounts</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 30px;">
+                <a href="/beta.html" class="btn btn-primary">🚀 Check Your Score</a>
+                <span class="status-badge status-dev">In Development</span>
+            </div>
+        </section>
+
+        <section class="features-grid">
+            <div class="feature-card">
+                <span class="feature-icon">🔗</span>
+                <div class="feature-title">Blockchain Verification <span class="status-badge status-concept">Concept</span></div>
+                <div class="feature-description">
+                    All trust scores are recorded on blockchain for transparency and immutability. Your reputation follows you across platforms and can't be manipulated.
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <span class="feature-icon">🎯</span>
+                <div class="feature-title">Multi-Factor Analysis <span class="status-badge status-dev">In Development</span></div>
+                <div class="feature-description">
+                    Comprehensive scoring based on gaming behavior, community interactions, transaction history, and social verification from trusted sources.
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <span class="feature-icon">🛡️</span>
+                <div class="feature-title">Privacy Protection <span class="status-badge status-concept">Concept</span></div>
+                <div class="feature-description">
+                    Zero-knowledge proofs ensure your personal data stays private while still allowing for trust verification and reputation building.
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <span class="feature-icon">🌐</span>
+                <div class="feature-title">Cross-Platform Integration <span class="status-badge status-beta">Beta</span></div>
+                <div class="feature-description">
+                    Your trust score works across Discord servers, gaming platforms, and crypto communities. Build once, use everywhere.
+                </div>
+            </div>
+        </section>
+
+        <section class="blockchain-section">
+            <h2 class="section-title">🔐 Trust Verification Levels</h2>
+            <p style="text-align: center; color: #cccccc; margin-bottom: 30px;">
+                Our scoring system uses multiple verification tiers to ensure accuracy and prevent manipulation
+            </p>
+            
+            <div class="verification-levels">
+                <div class="level-card">
+                    <div class="level-name">🥉 Bronze Trust</div>
+                    <div class="level-range">100-299</div>
+                    <div class="level-desc">Basic verification with limited community access</div>
+                </div>
+                
+                <div class="level-card">
+                    <div class="level-name">🥈 Silver Trust</div>
+                    <div class="level-range">300-599</div>
+                    <div class="level-desc">Verified gaming history and community standing</div>
+                </div>
+                
+                <div class="level-card">
+                    <div class="level-name">🥇 Gold Trust</div>
+                    <div class="level-range">600-799</div>
+                    <div class="level-desc">Established reputation with transaction history</div>
+                </div>
+                
+                <div class="level-card">
+                    <div class="level-name">💎 Diamond Trust</div>
+                    <div class="level-range">800-949</div>
+                    <div class="level-desc">Highly trusted with governance privileges</div>
+                </div>
+                
+                <div class="level-card">
+                    <div class="level-name">👑 Legendary Trust</div>
+                    <div class="level-range">950-1000</div>
+                    <div class="level-desc">Ultimate trust level with exclusive access</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="blockchain-section">
+            <h2 class="section-title">⚙️ How It Works</h2>
+            
+            <div class="blockchain-grid">
+                <div class="blockchain-card">
+                    <h3>📊 Data Collection</h3>
+                    <p>Automated tracking of gaming behavior, community interactions, and transaction patterns across integrated platforms.</p>
+                    <a href="/tiltcheck.html" class="btn btn-secondary">View Tracking</a>
+                </div>
+                
+                <div class="blockchain-card">
+                    <h3>🤖 AI Analysis</h3>
+                    <p>Machine learning algorithms analyze patterns to detect trustworthy behavior and identify potential risks or manipulation.</p>
+                    <a href="/whitepaper.html" class="btn btn-secondary">Technical Details</a>
+                </div>
+                
+                <div class="blockchain-card">
+                    <h3>🗳️ Community Validation</h3>
+                    <p>Peer review system where community members can vouch for or flag concerning behavior from other users.</p>
+                    <a href="https://discord.gg/betcollective" target="_blank" class="btn btn-secondary">Join Community</a>
+                </div>
+                
+                <div class="blockchain-card">
+                    <h3>🔗 Blockchain Recording</h3>
+                    <p>Final trust scores are recorded on blockchain with cryptographic proofs, ensuring transparency and immutability.</p>
+                    <a href="/compliance.html" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="blockchain-section">
+            <h2 class="section-title">🎮 Integration Benefits</h2>
+            <div style="text-align: center;">
+                <p style="color: #cccccc; margin-bottom: 30px; font-size: 1.1rem;">
+                    See how your Trust Score enhances your gaming experience across our ecosystem
+                </p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 30px 0;">
+                    <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 10px; border: 1px solid rgba(0, 212, 255, 0.3);">
+                        <div style="font-size: 2rem; margin-bottom: 10px;">🎯</div>
+                        <div style="color: #00d4ff; font-weight: bold; margin-bottom: 10px;">Gaming Access</div>
+                        <div style="color: #cccccc; font-size: 0.9rem;">Higher scores unlock exclusive tournaments and premium features</div>
+                    </div>
+                    
+                    <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 10px; border: 1px solid rgba(0, 212, 255, 0.3);">
+                        <div style="font-size: 2rem; margin-bottom: 10px;">💰</div>
+                        <div style="color: #00d4ff; font-weight: bold; margin-bottom: 10px;">Better Rates</div>
+                        <div style="color: #cccccc; font-size: 0.9rem;">Trusted users get better exchange rates and lower fees</div>
+                    </div>
+                    
+                    <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 10px; border: 1px solid rgba(0, 212, 255, 0.3);">
+                        <div style="font-size: 2rem; margin-bottom: 10px;">🏆</div>
+                        <div style="color: #00d4ff; font-weight: bold; margin-bottom: 10px;">VIP Status</div>
+                        <div style="color: #cccccc; font-size: 0.9rem;">Access to exclusive Discord channels and special events</div>
+                    </div>
+                    
+                    <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 10px; border: 1px solid rgba(0, 212, 255, 0.3);">
+                        <div style="font-size: 2rem; margin-bottom: 10px;">🗳️</div>
+                        <div style="color: #00d4ff; font-weight: bold; margin-bottom: 10px;">Governance</div>
+                        <div style="color: #cccccc; font-size: 0.9rem;">Vote on ecosystem decisions and feature development</div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 30px;">
+                    <a href="/ecosystem.html" class="btn btn-primary">🌐 View Full Ecosystem</a>
+                    <a href="/beta.html" class="btn btn-secondary">🧪 Join Beta Test</a>
+                </div>
+            </div>
+        </section>
+
+        <nav class="nav-links">
+            <a href="/index.html">🏠 Home</a>
+            <a href="/ecosystem.html">🌐 Ecosystem</a>
+            <a href="/tiltcheck.html">🎯 TiltCheck</a>
+            <a href="/suslink.html">🔍 SusLink</a>
+            <a href="/casinos.html">🎰 Casinos</a>
+            <a href="/sitemap.html">🗺️ Sitemap</a>
+        </nav>
+
+        <footer>
+            <div class="footer-motto">Degenerate in Gaming, Responsible in Life ❤️</div>
+            <div class="footer-links">
+                <a href="/index.html">Home</a>
+                <a href="https://github.com/jmenichole/trap-house-discord-bot" target="_blank">GitHub</a>
+                <a href="https://ko-fi.com/jmenichole0" target="_blank">Ko-fi</a>
+                <a href="https://discord.gg/betcollective" target="_blank">Discord</a>
+                <a href="/pitch-deck.html">Pitch Deck</a>
+            </div>
+            <div style="color: #666; font-size: 0.9rem;">
+                © 2025 TiltCheck.it.com | Degen Trust Score System
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

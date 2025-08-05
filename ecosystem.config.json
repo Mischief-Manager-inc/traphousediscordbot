@@ -1,0 +1,61 @@
+{
+  "apps": [
+    {
+      "name": "tiltcheck-unified-ecosystem",
+      "script": "unified-ecosystem-server.js",
+      "instances": 1,
+      "autorestart": true,
+      "watch": false,
+      "max_memory_restart": "1G",
+      "env": {
+        "PORT": 4001,
+        "NODE_ENV": "production"
+      },
+      "env_production": {
+        "PORT": 4001,
+        "NODE_ENV": "production"
+      },
+      "log_file": "./logs/ecosystem.log",
+      "out_file": "./logs/ecosystem-out.log",
+      "error_file": "./logs/ecosystem-error.log",
+      "log_date_format": "YYYY-MM-DD HH:mm:ss Z",
+      "merge_logs": true
+    },
+    {
+      "name": "tiltcheck-admin-dashboard",
+      "script": "dashboard/ecosystemDashboard.js",
+      "instances": 1,
+      "autorestart": true,
+      "watch": false,
+      "max_memory_restart": "512M",
+      "env": {
+        "PORT": 3001,
+        "NODE_ENV": "production"
+      },
+      "log_file": "./logs/dashboard.log",
+      "out_file": "./logs/dashboard-out.log", 
+      "error_file": "./logs/dashboard-error.log",
+      "log_date_format": "YYYY-MM-DD HH:mm:ss Z",
+      "merge_logs": true
+    },
+    {
+      "name": "tiltcheck-discord-bot",
+      "script": "main.js",
+      "instances": 1,
+      "autorestart": true,
+      "watch": false,
+      "max_memory_restart": "1G",
+      "env": {
+        "PORT": 3002,
+        "NODE_ENV": "production",
+        "CRYPTO_WALLET_SYSTEM_ENABLED": "true",
+        "COMPLIANCE_REPORTING_ENABLED": "true"
+      },
+      "log_file": "./logs/discord-bot.log",
+      "out_file": "./logs/discord-bot-out.log",
+      "error_file": "./logs/discord-bot-error.log", 
+      "log_date_format": "YYYY-MM-DD HH:mm:ss Z",
+      "merge_logs": true
+    }
+  ]
+}

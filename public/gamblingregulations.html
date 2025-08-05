@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gambling Regulations & Compliance | TiltCheck.it.com</title>
+    <meta name="description" content="Comprehensive guide to gambling laws, state regulations, and TiltCheck Trust Score compliance integration.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1e3a5f 50%, #2c5aa0 100%);
+            color: #ffffff;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 40px 0;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #3498db;
+            text-shadow: 0 0 20px rgba(52, 152, 219, 0.5);
+            margin-bottom: 10px;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            color: #74b9ff;
+            margin-bottom: 15px;
+        }
+        
+        .description {
+            font-size: 1.1rem;
+            color: #cccccc;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .compliance-hero {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            text-align: center;
+        }
+        
+        .state-checker {
+            background: linear-gradient(135deg, #2c5aa0, #1e3a5f);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+            border: 2px solid #3498db;
+        }
+        
+        .state-select {
+            width: 100%;
+            max-width: 400px;
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid #3498db;
+            background: rgba(0, 0, 0, 0.3);
+            color: #ffffff;
+            font-size: 1.1rem;
+            margin: 20px auto;
+            display: block;
+        }
+        
+        .state-select option {
+            background: #1e3a5f;
+            color: #ffffff;
+        }
+        
+        .compliance-result {
+            background: rgba(52, 152, 219, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            border: 1px solid #3498db;
+            display: none;
+        }
+        
+        .regulation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .regulation-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .regulation-card:hover {
+            transform: translateY(-5px);
+            border-color: #3498db;
+            box-shadow: 0 10px 30px rgba(52, 152, 219, 0.2);
+        }
+        
+        .regulation-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .regulation-title {
+            color: #3498db;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .regulation-description {
+            color: #cccccc;
+            line-height: 1.6;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        
+        .status-live {
+            background: rgba(0, 255, 136, 0.2);
+            color: #00ff88;
+        }
+        
+        .status-dev {
+            background: rgba(255, 107, 53, 0.2);
+            color: #ff6b35;
+        }
+        
+        .status-planned {
+            background: rgba(116, 185, 255, 0.2);
+            color: #74b9ff;
+        }
+        
+        .states-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(52, 152, 219, 0.3);
+        }
+        
+        .section-title {
+            color: #3498db;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .states-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .state-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid rgba(52, 152, 219, 0.2);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .state-card:hover {
+            border-color: #3498db;
+            background: rgba(52, 152, 219, 0.1);
+        }
+        
+        .state-card h3 {
+            color: #3498db;
+            margin-bottom: 10px;
+        }
+        
+        .state-card p {
+            color: #cccccc;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .compliance-level {
+            padding: 5px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .level-high {
+            background: rgba(0, 255, 136, 0.2);
+            color: #00ff88;
+        }
+        
+        .level-medium {
+            background: rgba(255, 193, 7, 0.2);
+            color: #ffc107;
+        }
+        
+        .level-low {
+            background: rgba(255, 107, 53, 0.2);
+            color: #ff6b35;
+        }
+        
+        .level-none {
+            background: rgba(255, 71, 87, 0.2);
+            color: #ff4757;
+        }
+        
+        .integration-info {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            padding: 25px;
+            margin: 20px 0;
+            border: 1px solid rgba(52, 152, 219, 0.3);
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin: 5px;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, #3498db, #74b9ff);
+            color: #fff;
+        }
+        
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid #3498db;
+            color: #3498db;
+        }
+        
+        .btn-secondary:hover {
+            background: #3498db;
+            color: #ffffff;
+        }
+        
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 40px 0;
+            padding: 20px 0;
+            border-top: 1px solid rgba(52, 152, 219, 0.3);
+        }
+        
+        .nav-links a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 15px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            background: rgba(52, 152, 219, 0.1);
+            text-shadow: 0 0 10px rgba(52, 152, 219, 0.8);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            border-top: 2px solid #3498db;
+            margin-top: 40px;
+        }
+        
+        .footer-motto {
+            font-size: 1.2rem;
+            color: #74b9ff;
+            margin-bottom: 15px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .footer-links a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .footer-links a:hover {
+            text-shadow: 0 0 10px rgba(52, 152, 219, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">📚 Gambling Regulations</div>
+            <div class="tagline">Compliance Made Simple</div>
+            <div class="description">Comprehensive guide to gambling laws, state regulations, and TiltCheck Trust Score compliance integration for responsible gaming operators.</div>
+        </header>
+
+        <section class="compliance-hero">
+            <h2>🗺️ Check Your State's Gambling Regulations</h2>
+            <p style="color: #cccccc; margin: 20px 0; font-size: 1.1rem;">
+                Understand your local gambling laws and learn how TiltCheck Trust Score integration can help ensure compliance with responsible gaming requirements.
+            </p>
+            
+            <div class="state-checker">
+                <h3 style="color: #74b9ff; margin-bottom: 20px;">🔍 State Compliance Checker</h3>
+                <select class="state-select" id="stateSelect" onchange="checkStateCompliance()">
+                    <option value="">Select Your State...</option>
+                    <option value="nevada">Nevada</option>
+                    <option value="newjersey">New Jersey</option>
+                    <option value="delaware">Delaware</option>
+                    <option value="pennsylvania">Pennsylvania</option>
+                    <option value="westvirginia">West Virginia</option>
+                    <option value="michigan">Michigan</option>
+                    <option value="connecticut">Connecticut</option>
+                    <option value="rhodeisland">Rhode Island</option>
+                    <option value="illinois">Illinois</option>
+                    <option value="indiana">Indiana</option>
+                    <option value="iowa">Iowa</option>
+                    <option value="tennessee">Tennessee</option>
+                    <option value="virginia">Virginia</option>
+                    <option value="colorado">Colorado</option>
+                    <option value="arizona">Arizona</option>
+                    <option value="montana">Montana</option>
+                    <option value="newhampshire">New Hampshire</option>
+                    <option value="oregon">Oregon</option>
+                    <option value="washington">Washington</option>
+                    <option value="newyork">New York</option>
+                    <option value="kansas">Kansas</option>
+                    <option value="louisiana">Louisiana</option>
+                    <option value="wyoming">Wyoming</option>
+                    <option value="arkansas">Arkansas</option>
+                    <option value="maryland">Maryland</option>
+                    <option value="ohio">Ohio</option>
+                    <option value="massachusetts">Massachusetts</option>
+                    <option value="california">California</option>
+                    <option value="texas">Texas</option>
+                    <option value="florida">Florida</option>
+                    <option value="other">Other State</option>
+                </select>
+                
+                <div class="compliance-result" id="complianceResult">
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px;">
+                        <strong style="color: #3498db;" id="resultTitle">Nevada Compliance Status</strong>
+                        <div class="compliance-level level-high" id="resultLevel">High Compliance</div>
+                    </div>
+                    <div id="resultDetails">
+                        <p style="color: #cccccc; margin-bottom: 15px;"><strong>Regulatory Framework:</strong></p>
+                        <ul style="color: #74b9ff; margin-left: 20px; margin-bottom: 15px;" id="resultFramework">
+                            <li>Nevada Gaming Control Board oversight</li>
+                            <li>Comprehensive responsible gaming requirements</li>
+                            <li>Mandatory self-exclusion programs</li>
+                            <li>Player protection measures required</li>
+                        </ul>
+                        <div class="integration-info">
+                            <h4 style="color: #3498db; margin-bottom: 10px;">🎯 TiltCheck Trust Score Integration Benefits:</h4>
+                            <ul style="color: #cccccc; margin-left: 20px;" id="resultBenefits">
+                                <li>✅ Automated responsible gaming monitoring</li>
+                                <li>✅ Real-time behavioral analysis and alerts</li>
+                                <li>✅ Compliance reporting and documentation</li>
+                                <li>✅ Player self-assessment tools</li>
+                                <li>✅ Integration with state exclusion databases</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <a href="/degentrustscore.html" class="btn btn-primary">Learn About Trust Score</a>
+                        <a href="/compliance.html" class="btn btn-secondary">Compliance Center</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="regulation-grid">
+            <div class="regulation-card">
+                <span class="regulation-icon">⚖️</span>
+                <div class="regulation-title">Federal Regulations <span class="status-badge status-live">Current</span></div>
+                <div class="regulation-description">
+                    Understanding federal gambling laws including the Wire Act, UIGEA, and PASPA repeal. How federal oversight interacts with state-level regulation and compliance requirements.
+                </div>
+            </div>
+
+            <div class="regulation-card">
+                <span class="regulation-icon">🏛️</span>
+                <div class="regulation-title">State-by-State Analysis <span class="status-badge status-live">Updated</span></div>
+                <div class="regulation-description">
+                    Comprehensive breakdown of gambling laws in all 50 states, including online gaming, sports betting, and responsible gaming requirements for operators.
+                </div>
+            </div>
+
+            <div class="regulation-card">
+                <span class="regulation-icon">🛡️</span>
+                <div class="regulation-title">Responsible Gaming Laws <span class="status-badge status-dev">Enhanced</span></div>
+                <div class="regulation-description">
+                    Detailed analysis of responsible gaming requirements, self-exclusion programs, and player protection measures mandated by various jurisdictions.
+                </div>
+            </div>
+
+            <div class="regulation-card">
+                <span class="regulation-icon">🔄</span>
+                <div class="regulation-title">Compliance Integration <span class="status-badge status-planned">Coming Soon</span></div>
+                <div class="regulation-description">
+                    How TiltCheck Trust Score system integrates with regulatory requirements to provide automated compliance monitoring and reporting for operators.
+                </div>
+            </div>
+        </section>
+
+        <section class="states-section">
+            <h2 class="section-title">🗺️ State Gambling Regulation Overview</h2>
+            <p style="text-align: center; color: #cccccc; margin-bottom: 30px;">
+                Click on any state to learn about their specific gambling laws and TiltCheck integration opportunities
+            </p>
+            
+            <div class="states-grid">
+                <div class="state-card" onclick="selectState('nevada')">
+                    <h3>Nevada</h3>
+                    <p>Comprehensive online and land-based gambling with strict responsible gaming requirements.</p>
+                    <div class="compliance-level level-high">High Compliance Required</div>
+                </div>
+                
+                <div class="state-card" onclick="selectState('newjersey')">
+                    <h3>New Jersey</h3>
+                    <p>Leading online gambling market with robust player protection measures.</p>
+                    <div class="compliance-level level-high">High Compliance Required</div>
+                </div>
+                
+                <div class="state-card" onclick="selectState('pennsylvania')">
+                    <h3>Pennsylvania</h3>
+                    <p>Expanding online gambling with comprehensive regulatory framework.</p>
+                    <div class="compliance-level level-high">High Compliance Required</div>
+                </div>
+                
+                <div class="state-card" onclick="selectState('michigan')">
+                    <h3>Michigan</h3>
+                    <p>Recently legalized online gambling with modern responsible gaming standards.</p>
+                    <div class="compliance-level level-medium">Medium Compliance</div>
+                </div>
+                
+                <div class="state-card" onclick="selectState('delaware')">
+                    <h3>Delaware</h3>
+                    <p>Pioneer in online gambling with established regulatory practices.</p>
+                    <div class="compliance-level level-medium">Medium Compliance</div>
+                </div>
+                
+                <div class="state-card" onclick="selectState('connecticut')">
+                    <h3>Connecticut</h3>
+                    <p>Newer online gambling market with developing regulations.</p>
+                    <div class="compliance-level level-medium">Medium Compliance</div>
+                </div>
+                
+                <div class="state-card" onclick="selectState('california')">
+                    <h3>California</h3>
+                    <p>Limited gambling options with potential for future expansion.</p>
+                    <div class="compliance-level level-low">Limited Regulation</div>
+                </div>
+                
+                <div class="state-card" onclick="selectState('texas')">
+                    <h3>Texas</h3>
+                    <p>Restrictive gambling laws with limited legal options.</p>
+                    <div class="compliance-level level-none">No Online Gambling</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="states-section">
+            <h2 class="section-title">🎯 TiltCheck Compliance Benefits</h2>
+            <div style="text-align: center;">
+                <p style="color: #cccccc; margin-bottom: 30px; font-size: 1.1rem;">
+                    How our Trust Score system helps operators meet regulatory requirements
+                </p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 30px 0;">
+                    <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 10px; border: 1px solid rgba(52, 152, 219, 0.3);">
+                        <div style="font-size: 2rem; margin-bottom: 10px;">📊</div>
+                        <div style="color: #3498db; font-weight: bold; margin-bottom: 10px;">Automated Monitoring</div>
+                        <div style="color: #cccccc; font-size: 0.9rem;">Real-time behavior analysis meets responsible gaming requirements automatically</div>
+                    </div>
+                    
+                    <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 10px; border: 1px solid rgba(52, 152, 219, 0.3);">
+                        <div style="font-size: 2rem; margin-bottom: 10px;">📋</div>
+                        <div style="color: #3498db; font-weight: bold; margin-bottom: 10px;">Compliance Reporting</div>
+                        <div style="color: #cccccc; font-size: 0.9rem;">Automated documentation and reporting for regulatory audits</div>
+                    </div>
+                    
+                    <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 10px; border: 1px solid rgba(52, 152, 219, 0.3);">
+                        <div style="font-size: 2rem; margin-bottom: 10px;">🔐</div>
+                        <div style="color: #3498db; font-weight: bold; margin-bottom: 10px;">Player Protection</div>
+                        <div style="color: #cccccc; font-size: 0.9rem;">Advanced intervention tools and self-exclusion integration</div>
+                    </div>
+                    
+                    <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 10px; border: 1px solid rgba(52, 152, 219, 0.3);">
+                        <div style="font-size: 2rem; margin-bottom: 10px;">⚡</div>
+                        <div style="color: #3498db; font-weight: bold; margin-bottom: 10px;">Real-Time Alerts</div>
+                        <div style="color: #cccccc; font-size: 0.9rem;">Instant notifications for concerning gambling behavior patterns</div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 30px;">
+                    <a href="/degentrustscore.html" class="btn btn-primary">🎯 Explore Trust Score</a>
+                    <a href="/compliance.html" class="btn btn-secondary">📋 Compliance Center</a>
+                </div>
+            </div>
+        </section>
+
+        <nav class="nav-links">
+            <a href="/index.html">🏠 Home</a>
+            <a href="/ecosystem.html">🌐 Ecosystem</a>
+            <a href="/compliance.html">📋 Compliance</a>
+            <a href="/degentrustscore.html">📊 Trust Score</a>
+            <a href="/casinos.html">🎰 Casinos</a>
+            <a href="/sitemap.html">🗺️ Sitemap</a>
+        </nav>
+
+        <footer>
+            <div class="footer-motto">Degenerate in Gaming, Responsible in Life ❤️</div>
+            <div class="footer-links">
+                <a href="/index.html">Home</a>
+                <a href="https://github.com/jmenichole/trap-house-discord-bot" target="_blank">GitHub</a>
+                <a href="https://ko-fi.com/jmenichole0" target="_blank">Ko-fi</a>
+                <a href="https://discord.gg/betcollective" target="_blank">Discord</a>
+                <a href="/pitch-deck.html">Pitch Deck</a>
+            </div>
+            <div style="color: #666; font-size: 0.9rem;">
+                © 2025 TiltCheck.it.com | Gambling Regulations & Compliance
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        const stateData = {
+            nevada: {
+                title: "Nevada Compliance Status",
+                level: "High Compliance Required",
+                levelClass: "level-high",
+                framework: [
+                    "Nevada Gaming Control Board oversight",
+                    "Comprehensive responsible gaming requirements",
+                    "Mandatory self-exclusion programs",
+                    "Player protection measures required",
+                    "Regular compliance audits and reporting"
+                ],
+                benefits: [
+                    "✅ Automated responsible gaming monitoring",
+                    "✅ Real-time behavioral analysis and alerts",
+                    "✅ Compliance reporting and documentation",
+                    "✅ Player self-assessment tools",
+                    "✅ Integration with state exclusion databases"
+                ]
+            },
+            newjersey: {
+                title: "New Jersey Compliance Status",
+                level: "High Compliance Required",
+                levelClass: "level-high",
+                framework: [
+                    "New Jersey Division of Gaming Enforcement oversight",
+                    "Strict responsible gaming protocols",
+                    "Mandatory player protection tools",
+                    "Regular compliance monitoring",
+                    "Integration with state exclusion programs"
+                ],
+                benefits: [
+                    "✅ Automated monitoring for DGE compliance",
+                    "✅ Real-time intervention capabilities",
+                    "✅ Comprehensive audit trail generation",
+                    "✅ Player behavior analytics and reporting",
+                    "✅ Self-exclusion database integration"
+                ]
+            },
+            california: {
+                title: "California Compliance Status",
+                level: "Limited Regulation",
+                levelClass: "level-low",
+                framework: [
+                    "Limited legal gambling options",
+                    "Tribal gaming compacts only",
+                    "No online gambling regulation",
+                    "Potential future legislation pending",
+                    "Basic consumer protection measures"
+                ],
+                benefits: [
+                    "🔄 Preparation for future regulation",
+                    "📊 Behavioral data collection and analysis",
+                    "🛡️ Proactive responsible gaming measures",
+                    "📋 Documentation for future compliance",
+                    "⚡ Ready for rapid deployment when legal"
+                ]
+            },
+            texas: {
+                title: "Texas Compliance Status",
+                level: "No Online Gambling",
+                levelClass: "level-none",
+                framework: [
+                    "Very restrictive gambling laws",
+                    "No legal online gambling",
+                    "Limited tribal gaming only",
+                    "No state regulatory framework",
+                    "Potential future consideration unclear"
+                ],
+                benefits: [
+                    "📚 Educational responsible gaming tools",
+                    "🔍 Behavioral pattern research",
+                    "📊 Data collection for future use",
+                    "🛡️ Community awareness programs",
+                    "⏳ Preparation for potential future legalization"
+                ]
+            }
+        };
+
+        function checkStateCompliance() {
+            const select = document.getElementById('stateSelect');
+            const result = document.getElementById('complianceResult');
+            const state = select.value;
+            
+            if (!state) {
+                result.style.display = 'none';
+                return;
+            }
+            
+            const data = stateData[state] || stateData.california; // Default fallback
+            
+            document.getElementById('resultTitle').textContent = data.title;
+            document.getElementById('resultLevel').textContent = data.level;
+            document.getElementById('resultLevel').className = `compliance-level ${data.levelClass}`;
+            
+            const frameworkList = document.getElementById('resultFramework');
+            frameworkList.innerHTML = data.framework.map(item => `<li>${item}</li>`).join('');
+            
+            const benefitsList = document.getElementById('resultBenefits');
+            benefitsList.innerHTML = data.benefits.map(item => `<li>${item}</li>`).join('');
+            
+            result.style.display = 'block';
+        }
+
+        function selectState(state) {
+            document.getElementById('stateSelect').value = state;
+            checkStateCompliance();
+            document.getElementById('complianceResult').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

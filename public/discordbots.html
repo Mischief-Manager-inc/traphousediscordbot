@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discord Bot Collection | TiltCheck.it.com</title>
+    <meta name="description" content="Complete Discord bot ecosystem for gaming, gambling monitoring, and community management.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #ffffff;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 40px 0;
+            border-bottom: 2px solid #5865f2;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #5865f2;
+            text-shadow: 0 0 20px rgba(88, 101, 242, 0.5);
+            margin-bottom: 10px;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            color: #ff6b35;
+            margin-bottom: 15px;
+        }
+        
+        .description {
+            font-size: 1.1rem;
+            color: #cccccc;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .bot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .bot-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid rgba(88, 101, 242, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .bot-card:hover {
+            transform: translateY(-5px);
+            border-color: #5865f2;
+            box-shadow: 0 10px 30px rgba(88, 101, 242, 0.2);
+        }
+        
+        .bot-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .bot-icon {
+            font-size: 2.5rem;
+            margin-right: 15px;
+        }
+        
+        .bot-title {
+            color: #5865f2;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .bot-status {
+            margin-left: auto;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .status-online {
+            background: rgba(0, 255, 136, 0.2);
+            color: #00ff88;
+        }
+        
+        .status-dev {
+            background: rgba(255, 107, 53, 0.2);
+            color: #ff6b35;
+        }
+        
+        .status-beta {
+            background: rgba(255, 193, 7, 0.2);
+            color: #ffc107;
+        }
+        
+        .bot-description {
+            color: #cccccc;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .bot-features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+        
+        .bot-features li {
+            color: #ffffff;
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .bot-features li:before {
+            content: "✨";
+            position: absolute;
+            left: 0;
+        }
+        
+        .bot-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, #5865f2, #7289da);
+            color: #ffffff;
+        }
+        
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(88, 101, 242, 0.4);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid #5865f2;
+            color: #5865f2;
+        }
+        
+        .btn-secondary:hover {
+            background: #5865f2;
+            color: #ffffff;
+        }
+        
+        .management-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+        }
+        
+        .management-section h2 {
+            color: #00ff88;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .management-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .management-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            text-align: center;
+        }
+        
+        .management-card h3 {
+            color: #00ff88;
+            margin-bottom: 10px;
+        }
+        
+        .management-card p {
+            color: #cccccc;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 40px 0;
+            padding: 20px 0;
+            border-top: 1px solid rgba(88, 101, 242, 0.3);
+        }
+        
+        .nav-links a {
+            color: #5865f2;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 15px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            background: rgba(88, 101, 242, 0.1);
+            text-shadow: 0 0 10px rgba(88, 101, 242, 0.8);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            border-top: 2px solid #5865f2;
+            margin-top: 40px;
+        }
+        
+        .footer-motto {
+            font-size: 1.2rem;
+            color: #ff6b35;
+            margin-bottom: 15px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .footer-links a {
+            color: #5865f2;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .footer-links a:hover {
+            text-shadow: 0 0 10px rgba(88, 101, 242, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">🤖 Discord Bot Collection</div>
+            <div class="tagline">Degenerate in Gaming, Responsible in Life</div>
+            <div class="description">Complete Discord bot ecosystem for gaming, gambling monitoring, and community management.</div>
+        </header>
+
+        <section class="bot-grid">
+            <div class="bot-card">
+                <div class="bot-header">
+                    <div class="bot-icon">🎮</div>
+                    <div>
+                        <div class="bot-title">TrapHouse Bot</div>
+                    </div>
+                    <div class="bot-status status-online">Online</div>
+                </div>
+                <div class="bot-description">
+                    Main Discord bot for gaming communities with gambling monitoring, entertainment features, and responsible gaming tools.
+                </div>
+                <ul class="bot-features">
+                    <li>Real-time gambling behavior tracking</li>
+                    <li>Responsible gaming alerts and limits</li>
+                    <li>Community moderation tools</li>
+                    <li>Entertainment and casino games</li>
+                    <li>Crypto tipping integration</li>
+                </ul>
+                <div class="bot-actions">
+                    <a href="/bot.html" class="btn btn-primary">Invite Bot</a>
+                    <a href="/support.html" class="btn btn-secondary">Get Support</a>
+                </div>
+            </div>
+
+            <div class="bot-card">
+                <div class="bot-header">
+                    <div class="bot-icon">🃏</div>
+                    <div>
+                        <div class="bot-title">Degens Bot</div>
+                    </div>
+                    <div class="bot-status status-beta">Beta</div>
+                </div>
+                <div class="bot-description">
+                    Strategic card game bot with NFT integration and competitive gameplay mechanics.
+                </div>
+                <ul class="bot-features">
+                    <li>Degens Against Decency card game</li>
+                    <li>NFT card collection system</li>
+                    <li>Multiplayer tournaments</li>
+                    <li>Player rankings and stats</li>
+                    <li>Custom deck building</li>
+                </ul>
+                <div class="bot-actions">
+                    <a href="/degensagainstdecency.html" class="btn btn-primary">Play Game</a>
+                    <a href="/beta.html" class="btn btn-secondary">Join Beta</a>
+                </div>
+            </div>
+
+            <div class="bot-card">
+                <div class="bot-header">
+                    <div class="bot-icon">📊</div>
+                    <div>
+                        <div class="bot-title">TiltCheck Monitor</div>
+                    </div>
+                    <div class="bot-status status-dev">In Development</div>
+                </div>
+                <div class="bot-description">
+                    Advanced gambling behavior analysis and intervention system for Discord communities.
+                </div>
+                <ul class="bot-features">
+                    <li>Real-time tilt detection</li>
+                    <li>Automated intervention alerts</li>
+                    <li>Gambling pattern analysis</li>
+                    <li>Community safety reporting</li>
+                    <li>Responsible gaming resources</li>
+                </ul>
+                <div class="bot-actions">
+                    <a href="/tiltcheck.html" class="btn btn-primary">Learn More</a>
+                    <a href="/beta.html" class="btn btn-secondary">Request Access</a>
+                </div>
+            </div>
+
+            <div class="bot-card">
+                <div class="bot-header">
+                    <div class="bot-icon">🔍</div>
+                    <div>
+                        <div class="bot-title">SusLink Detector</div>
+                    </div>
+                    <div class="bot-status status-dev">In Development</div>
+                </div>
+                <div class="bot-description">
+                    Community-powered link verification and safety system for Discord servers.
+                </div>
+                <ul class="bot-features">
+                    <li>Automatic link scanning</li>
+                    <li>Community reputation system</li>
+                    <li>Phishing protection</li>
+                    <li>Scam site database</li>
+                    <li>Real-time threat alerts</li>
+                </ul>
+                <div class="bot-actions">
+                    <a href="/suslink.html" class="btn btn-primary">Learn More</a>
+                    <a href="/beta.html" class="btn btn-secondary">Join Beta</a>
+                </div>
+            </div>
+
+            <div class="bot-card">
+                <div class="bot-header">
+                    <div class="bot-icon">💰</div>
+                    <div>
+                        <div class="bot-title">Crypto Tip Bot</div>
+                    </div>
+                    <div class="bot-status status-online">Online</div>
+                </div>
+                <div class="bot-description">
+                    Secure cryptocurrency tipping system with wallet management and transaction tracking.
+                </div>
+                <ul class="bot-features">
+                    <li>Multi-crypto tipping support</li>
+                    <li>Secure wallet management</li>
+                    <li>Transaction history tracking</li>
+                    <li>Exchange rate monitoring</li>
+                    <li>Tax reporting tools</li>
+                </ul>
+                <div class="bot-actions">
+                    <a href="https://tiltcheckecosystem.created.app/justthetip" target="_blank" class="btn btn-primary">Access System</a>
+                    <a href="/support.html" class="btn btn-secondary">Get Help</a>
+                </div>
+            </div>
+
+            <div class="bot-card">
+                <div class="bot-header">
+                    <div class="bot-icon">⏰</div>
+                    <div>
+                        <div class="bot-title">CollectClock</div>
+                    </div>
+                    <div class="bot-status status-online">Online</div>
+                </div>
+                <div class="bot-description">
+                    Time-based reward collection system with daily challenges and community events.
+                </div>
+                <ul class="bot-features">
+                    <li>Daily reward collections</li>
+                    <li>Time-based challenges</li>
+                    <li>Community leaderboards</li>
+                    <li>Streak tracking</li>
+                    <li>Special event rewards</li>
+                </ul>
+                <div class="bot-actions">
+                    <a href="https://jmenichole.github.io/CollectClock/" target="_blank" class="btn btn-primary">Visit Site</a>
+                    <a href="/support.html" class="btn btn-secondary">Integration Help</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="management-section">
+            <h2>🛠️ Bot Management & Support</h2>
+            <div class="management-grid">
+                <div class="management-card">
+                    <h3>📊 Bot Dashboard</h3>
+                    <p>Manage all your Discord bots from a centralized dashboard with real-time monitoring.</p>
+                    <a href="/aimoverlay.html" class="btn btn-secondary">Access Dashboard</a>
+                </div>
+                <div class="management-card">
+                    <h3>🎛️ Configuration</h3>
+                    <p>Customize bot settings, permissions, and features for your specific server needs.</p>
+                    <a href="/support.html" class="btn btn-secondary">Configure Bots</a>
+                </div>
+                <div class="management-card">
+                    <h3>📈 Analytics</h3>
+                    <p>Track bot usage, user engagement, and community health metrics.</p>
+                    <a href="/api/stats" class="btn btn-secondary">View Analytics</a>
+                </div>
+                <div class="management-card">
+                    <h3>🆘 Support</h3>
+                    <p>Get help with bot installation, configuration, and troubleshooting.</p>
+                    <a href="https://discord.gg/betcollective" target="_blank" class="btn btn-secondary">Get Support</a>
+                </div>
+            </div>
+        </section>
+
+        <nav class="nav-links">
+            <a href="/index.html">🏠 Home</a>
+            <a href="/ecosystem.html">🌐 Ecosystem</a>
+            <a href="/tiltcheck.html">🎯 TiltCheck</a>
+            <a href="/casinos.html">🎰 Casinos</a>
+            <a href="/support.html">🆘 Support</a>
+            <a href="/sitemap.html">🗺️ Sitemap</a>
+        </nav>
+
+        <footer>
+            <div class="footer-motto">Made 4 Degens by Degens ❤️</div>
+            <div class="footer-links">
+                <a href="/index.html">Home</a>
+                <a href="https://github.com/jmenichole/trap-house-discord-bot" target="_blank">GitHub</a>
+                <a href="https://ko-fi.com/jmenichole0" target="_blank">Ko-fi</a>
+                <a href="https://discord.gg/betcollective" target="_blank">Discord</a>
+                <a href="/pitch-deck.html">Pitch Deck</a>
+            </div>
+            <div style="color: #666; font-size: 0.9rem;">
+                © 2025 TiltCheck.it.com | Discord Bot Ecosystem
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
